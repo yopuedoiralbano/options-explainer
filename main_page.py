@@ -404,7 +404,7 @@ def simulate_gbm_paths(s0, mu, sigma, n=24, T=30, num_paths=1000, plot=True):
         st.plotly_chart(fig_paths)
 
 
-simulate_gbm_paths(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=100, plot=True)
+simulate_gbm_paths(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=10, plot=True)
 
 
 
