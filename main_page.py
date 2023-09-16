@@ -229,9 +229,33 @@ We sum our profit, weighted by the probability it happens, so we do 1/6 * 1 + 1/
 
 So the fair price of this dice 4 dollar call should be 0.5 dollars. 
 
-We can visualize this
+We can visualize this as a histogram of outcomes: """)
 
-TODO: visualize the die call option
+
+
+def roll_dice():
+    return np.random.randint(1, 7)
+
+# Streamlit UI
+st.title("Dice Roll Histogram")
+
+# Sidebar to set the threshold 'x'
+x = st.sidebar.slider("Select the threshold 'x'", 1, 6, 3)
+
+# Generate random dice rolls
+rolls = [roll_dice() for _ in range(1000)]
+
+# Create a histogram
+hist_fig = px.histogram(rolls, nbins=6, range_x=[1, 7], title=f"Dice Roll Histogram (Threshold: {x})")
+hist_fig.update_xaxes(title_text="Dice Value")
+hist_fig.update_yaxes(title_text="Frequency")
+hist_fig.update_traces(marker_color=['green' if roll >= x else 'red' for roll in rolls])
+
+# Display the histogram
+st.plotly_chart(hist_fig)
+
+
+st.write("""TODO: visualize the die call option
 ideal visualization: histogram colored such that the values above 4 are green and the others aren't
 give students a slider to change the strike and see how the fair value changes
 
