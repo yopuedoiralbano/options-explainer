@@ -50,7 +50,7 @@ max_price = 500
 strike_price = 200
 premium = 0
 
-underlying_prices = np.linspace(min_price, max_price, 9)
+underlying_prices = np.linspace(min_price, max_price, 10)
 
 def calculate_long_call_payoff(underlying_price, strike_price, premium):
     payoffs = np.where(underlying_prices <= strike_price, -premium, (underlying_prices - strike_price) - premium)
