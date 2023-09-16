@@ -250,14 +250,30 @@ dice_strike = st.slider("Select the strike price 'x'", 1, 6, 3)
 # Generate random dice rolls
 rolls = [roll_dice() for _ in range(1000)]
 
-# Create a histogram
-hist_fig = px.histogram(rolls, nbins=6, range_x=[1, 7], title=f"Dice Roll Histogram (Strike: {dice_strike})")
-hist_fig.update_xaxes(title_text="Dice Value")
-hist_fig.update_yaxes(title_text="Frequency")
-hist_fig.update_traces(marker_color=['green' if roll > dice_strike else 'red' for roll in rolls])
+hist, bin_edges = np.histogram(rolls, bins=6, range=(1, 7))
+
+# Define colors based on bin values
+colors = ['green' if bin_value > dice_strike else 'red' for bin_value in bin_edges[1:]]
+
+# Create a bar chart using Plotly
+fig_dice = go.Figure()
+fig_dice.add_trace(go.Bar(
+    x=bin_edges[1:],
+    y=hist,
+    marker_color=colors,
+    text=hist,
+    textposition='outside'
+))
+
+# Update the layout
+fig_dice.update_layout(
+    title=f"Dice Roll Histogram (Threshold: {dice_strike})",
+    xaxis_title="Dice Value",
+    yaxis_title="Frequency"
+)
 
 # Display the histogram
-st.plotly_chart(hist_fig)
+st.plotly_chart(fig_dice)
 
 
 st.write("""TODO: visualize the die call option
