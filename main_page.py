@@ -250,7 +250,7 @@ def roll_dice():
 dice_strike = st.slider("Select the strike price of the option", 1, 6, 3)
 
 # Generate random dice rolls
-rolls = [roll_dice() for _ in range(1000)]
+rolls = [roll_dice() for _ in range(100000)]
 
 hist, bin_edges = np.histogram(rolls, bins=6, range=(1, 7))
 
