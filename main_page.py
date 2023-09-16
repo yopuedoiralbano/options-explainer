@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
-import plotly.subplots as sp
+from plotly.subplots import make_subplots
 
 
 # Define the Streamlit app
