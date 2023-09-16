@@ -309,7 +309,7 @@ expected_value = np.sum(probabilities * bin_edges_payoffs[:-1])
 latex_string_dice = ""
 
 for i in probabilities:
-    latex_string_dice += f"{probabilities[i]} \\times {bin_edges_payoffs[i] + }"
+    latex_string_dice += f"{probabilities[i]} \\times {bin_edges_payoffs[i]} + "
     
 st.latex(latex_string_dice)
 st.write(expected_value)
