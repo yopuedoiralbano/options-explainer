@@ -102,7 +102,7 @@ premium_input = st.slider(
 
 
 
-underlying_prices_shoes = np.linspace(min_max_price_input[0], min_max_price_input[1], (min_max_price_input[1]-min_max_price_input[0])/step_size_input)
+underlying_prices_shoes = np.linspace(min_max_price_input[0], min_max_price_input[1], (min_max_price_input[1]-min_max_price_input[0])//step_size_input)
 
 payoffs_shoes = calculate_long_call_payoff(underlying_prices_shoes, strike_price_input, premium_input)
 
