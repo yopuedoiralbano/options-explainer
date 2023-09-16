@@ -14,9 +14,9 @@ Options let us express views on how wiggly a stock is
 
 Options are kind of like coupons. 
 
-Let’s say Nike is selling coupons for a pair of basketball shoes, at 10 dollars per coupon. 
-They’re selling coupons that will let you buy 2 pairs of LeBron shoes for 200 dollars. 
-The coupons expire in 1 month, so you have some time to decide to use the coupon. 
+Let’s say Nike is selling coupons for a pair of basketball shoes, at **10 dollars per coupon**. 
+Each coupon will let you buy **2 pairs of LeBron shoes** for **200 dollars each**. 
+The coupons **expire in 1 month**, so you have some time to decide to use the coupon. 
 
 These coupons have:
 - **a price** (you have to pay money for the coupon)
@@ -24,11 +24,11 @@ These coupons have:
 - **an underlying asset** (you get to buy LeBrons)
 - **an expiry date** (you get to buy LeBrons until 1 month from now)
 - **a price to transact at** (you get to buy LeBrons at 200 dollars until 1 month from now)
-- **a quantity** (you get to buy 2 pairs of LeBrons at 200 dollars until 1 month from now)
+- **a quantity** (you get to buy 2 pairs of LeBrons at 200 dollars each until 1 month from now)
 
 How do we know how much these coupons are worth? 
 
-If the Lebrons cost 190 dollars right now, do you really want to use the coupon? Probably not, since you can just buy the shoes from Nike instead. So the coupon likely isn’t worth much. 
+If the Lebrons cost 190 dollars each right now, do you really want to use the coupon? Probably not, since you can just buy the shoes from Nike instead. So the coupon likely isn’t worth much. 
 
 But let’s say LeBron wins the finals with the Lakers next week (hypothetically). Suddenly, the LeBrons are flying off the shelves, and Nike jacks up the prices to 300 dollars a pair!
 
