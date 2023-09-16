@@ -560,7 +560,7 @@ s0_input = st.slider(
 
 strike_val_input = st.slider(
     'Select the strike price of the option!',
-    s0_input*0.8, s0_input*1.2, s0_input)
+    int(s0_input*0.8), int(s0_input*1.2), s0_input)
 
 time_to_expiry_input = st.slider(
     'Select the amount of days until the stock expires!',
