@@ -81,17 +81,19 @@ st.plotly_chart(fig)
 st.write("""
 This is pretty cool! Looks like we have a ton of upside, and not very much downside. 
 
-Play around with the parameters a bit if you'd like: 
----
+Play around with the parameters a bit, try to answer the following questions/do the following:
+
+TODO: make these exploration questions better lol
+
+- what happens when the coupon price is above the maximum price range?
+- what happens when the coupon price is below the minimum price range?
+- can you make the price for the coupon just high enough that your maximum profit is 0?
+- can you make the price for the coupon just low enough that your minimum profit is 0?
 """)
 
 min_max_price_input = st.slider(
     'Select the price range to plot!',
     0, 1000, (50, 400))
-
-step_size_input = st.slider(
-    'Select the step size to plot with!',
-    0, 100, 50)
 
 strike_price_input = st.slider(
     'Select the coupon price to buy shoes at!',
@@ -103,7 +105,7 @@ premium_input = st.slider(
 
 
 
-underlying_prices_shoes = np.linspace(min_max_price_input[0], min_max_price_input[1], (min_max_price_input[1]-min_max_price_input[0])//step_size_input)
+underlying_prices_shoes = np.linspace(min_max_price_input[0], min_max_price_input[1], (min_max_price_input[1]-min_max_price_input[0]))
 
 payoffs_shoes = calculate_long_call_payoff(underlying_prices_shoes, strike_price_input, premium_input)
 
