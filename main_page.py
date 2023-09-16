@@ -194,15 +194,19 @@ st.plotly_chart(fig_bag)
 
 st.write("""
 
-### Terminology
+### What does this have to do with options?
 
-What we've just described here are call and put options. 
+What we've just described here **are** options!
+
+Options come in two types, **Calls** and **Puts**.
 
 Like with the Nike Coupons, Call Options allow you to buy a fixed amount of some asset (for example, stocks), at a specified price until an expiration date.
 
 And like with the Coworker Handbag Deal, Put Options allow you to sell a fixed amount of some asset (for example, stocks), at a specified price until an expiration date.
 
 They're called 'options' because you don't have to do them! If the LeBrons had never increased in price, all we lose is the amount we paid for the option, same situation for the handbag. 
+
+### Terminology
 
 Let's quickly go over some terminology, so that everyone is on the same page. 
 
@@ -224,24 +228,28 @@ LeBron 30DTE 200c @ 10 dollars
 
 Handbag 365DTE 1500p @ 100 dollars
 
-### How much are options worth, exactly?
+### How much should options cost?
 
 What does any of this have to do with the key idea of volatility? 
 
-Well, it mostly comes from how we price these options
+It mostly comes from how we price these options.
 
-I'm going to roll a die, and the value of the die will be the amount of dots on the face-up side of the die. 
+Let's use a very simple underlying asset to start with: a die.
 
-You can assume the die is fair, and there's an equal chance that each face comes up on top.
+I'm going to roll the die, and the value of the die will be the amount of dots on the face-up side of the die. 
 
-How much should the 4 dollar strike be worth (or what is its premium)? 
+So if the die comes up 6, the asset is worth 6 dollars. 
 
-Let's say that the multiplier is 1 (just one die) and that the expiration is after the dice is rolled, and its price is determined. 
+You can assume the die is fair, so there's an equal chance that each face comes up on top.
 
-Pretend it's worth 1 cent. Seems a bit cheap, right? We could buy it for a cent a bunch of times, and expect to make more than a cent most of the time - so that's probably wrong. 
+How much should the 4 dollar strike be worth (or what is its premium)? Let's say that the multiplier is 1 (just one die) and that the expiration is after the dice is rolled, and its price is determined. 
 
-Let's pretend it's worth 3 dollars. 
-That seems a bit high, we could sell it to someone at that price a bunch of times and expect to make money most of the time, since it's never going to pay out more than 3 dollars. 
+We'll start by randomly guessing and vibing out some basic ideas. 
+
+Pretend it's worth 1 cent. Seems a bit cheap, right? We could buy it for a cent a bunch of times, and expect to make more than a cent most of the time - so that's probably too cheap. (Why?)
+
+What if it's worth 2 dollars?
+That seems a bit high, we could sell it to someone at that price a bunch of times and expect to make money almost every time, since it's never going to pay out more than 2 dollars. (Why?) 
 
 So the answer is somewhere in between these bounds. 
 
@@ -333,7 +341,7 @@ for i in range(len(probabilities)):
 st.write("""
 Now we can calculate the average price of the option over the 100,000 rolls, and that should be pretty close to what the option is actually worth!
 
-We multiply each payoff by the probability of getting each of the payoffs, and add them all together
+We multiply each payoff by the probability of getting each of the payoffs, and add them all together, effectively a weighted average
 
 So for each outcome $i$
 """)
@@ -341,13 +349,36 @@ So for each outcome $i$
 st.latex('''
 \\text{average value} = \\sum_i^n \\text{probability of outcome i} \\times \\text{payoff of outcome i}''')
 
+st.write(""" plugging in the values from the histogram above, we find that the strike selected's average value is: """)
+
 st.latex(latex_string_dice)
 
 st.write("""
 
 This is pretty much how options are priced in the real world, on just about any asset!
 
-We come up with some distribution of potential prices at the time the option expires, and we get the option's price by calculating what we expect the value of the option to be at the expiration date
+1. Come up with a distribution of the possible prices of the asset on the day of the expiry.
+2. Estimate or simulate the probability that each price happens
+3. Figure out how much the option is worth for each price
+4. Find the average value of the option based on the probability distribution of prices
+
+Here, we 
+1. Came up with the distribution of possible prices (1-6 are the possible faces of a die)
+2. Estimated the probability of each possible price by simulating (roughly 1/6 since it's a fair die)
+3. Figured out how much the option is worth for each price (Die Value - Strike Price whenever the Die Value > Strike Price)
+4. Found the average value of the option based on the probability distribution of prices (multiplied each outcome by its probability, weighted average)
+
+### What does this have to do with stocks?
+
+Just like how we came up with a distribution of values of the die at the end of the die roll, we can come up with a distribution of prices of a stock on the day of an option's expiration!
+
+We'll skip over some of the technical detail on how exactly we're going to simulate a stock price series, but you can look up Wiener Process to find out more
+
+""")
+
+
+
+st.write("""
 
 do the thing where we plot a spaghetti chart of possible stock price series
 
