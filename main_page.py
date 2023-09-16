@@ -301,6 +301,8 @@ fig_dice_payoff.update_layout(
     yaxis_title="Frequency"
 )
 
+st.plotly_chart(fig_dice_payoff)
+
 
 
 
