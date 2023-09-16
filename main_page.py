@@ -17,6 +17,7 @@ Options are kind of like coupons.
 Let’s say Nike is selling coupons for a pair of basketball shoes, at **10 dollars per coupon**. 
 
 Each coupon will let you buy **2 pairs of LeBron shoes** for **200 dollars each**. 
+
 The coupons **expire in 1 month**, so you have some time to decide to use the coupon. 
 
 These coupons have:
@@ -33,10 +34,11 @@ If the Lebrons cost 190 dollars each right now, do you really want to use the co
 
 But let’s say LeBron wins the finals with the Lakers next week (hypothetically). Suddenly, the LeBrons are flying off the shelves, and Nike jacks up the prices to 300 dollars a pair!
 
-How are we feeling? Pretty good I’d imagine! We can buy LeBrons for 100 dollars off the retail price.
+How are we feeling? Pretty good I’d imagine! We can buy each pair of LeBrons for 100 dollars off the retail price.
 
 Since we expect there's a lot of people willing to buy the shoe, we might even buy the 2 pairs of shoes for 200 dollars, and sell them to someone else for 300 dollars each. 
 This means we'd make 190 dollars! 
+
 Can you see why? 
 
 """)
@@ -51,7 +53,7 @@ st.latex('''(\\text{Nike Price} - \\text{Coupon Price}) \\times (n \\text{ pairs
 
 
 st.write("""
-So if we know the coupon is expiring today, we can pretty easily plot out the profit we might get from buying and using it as a function of Nike's retail price.
+So if we know the coupon is expiring today, we can pretty easily plot out the profit we might get from the using the coupon, as a function of Nike's retail price.
 """)
 
 
@@ -80,20 +82,16 @@ st.plotly_chart(fig)
 
 
 st.write("""
-This is pretty cool! Looks like we have a ton of upside, and not very much downside. 
+This is pretty cool! Looks like we have a ton of upside (potentially infinite), and not very much downside (what we paid for the coupon, 10 dollars). 
 
 Play around with the parameters a bit, try to answer the following questions/do the following:
 
 TODO: make these exploration questions better lol
 
-- what happens when the coupon price is above the maximum price range?
-- what happens when the coupon price is below the minimum price range?
+- what happens when the coupon price is above the maximum of the price range?
+- what happens when the coupon price is below the minimum of the price range?
 - what's the relation between the price paid for the coupon, coupon price, and the min/max price range?
 """)
-
-min_max_price_input = st.slider(
-    'Select the price range to plot!',
-    0, 1000, (50, 400))
 
 strike_price_input = st.slider(
     'Select the coupon price to buy shoes at!',
@@ -103,7 +101,7 @@ premium_input = st.slider(
     'Select the price we paid for the coupon!',
     0, 1000, 10)
 
-underlying_prices_shoes = np.linspace(min_max_price_input[0], min_max_price_input[1], (min_max_price_input[1]-min_max_price_input[0]))
+underlying_prices_shoes = np.linspace(0, 1000, (1000))
 
 payoffs_shoes = calculate_long_call_payoff(underlying_prices_shoes, strike_price_input, premium_input)
 
