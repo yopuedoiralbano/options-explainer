@@ -80,6 +80,40 @@ st.plotly_chart(fig)
 
 st.write("""
 This is pretty cool! Looks like we have a ton of upside, and not very much downside. 
+
+Play around with the parameters a bit if you'd like: 
 """)
+
+min_max_price_input = st.slider(
+    'Select the price range to plot!',
+    0, 1000, (50, 400))
+
+step_size_input = st.slider(
+    'Select the step size to plot with!',
+    0, 100, 50)
+
+strike_price_input = st.slider(
+    'Select the coupon price to buy shoes at!',
+    0, 1000, 200)
+
+premium_input = st.slider(
+    'Select the price we paid for the coupon!',
+    0, 1000, 10)
+
+
+
+underlying_prices_shoes = np.linspace(min_max_price_input[0], min_max_price_input[1], {(min_max_price_input[1]-min_max_price_input[0])/step_size_input})
+
+payoffs_shoes = calculate_long_call_payoff(underlying_prices_shoes, strike_price_input, premium_input)
+
+fig2 = px.line(x=underlying_prices_shoes, y=payoffs_shoes, labels={"x": "LeBron Shoe Value", "y": "Profit"})
+fig2.update_layout(
+    title=f"Coupon Profit Diagram",
+    xaxis_title="LeBron Shoe Value",
+    yaxis_title="Profit"
+)
+
+st.plotly_chart(fig2)
+
 
 
