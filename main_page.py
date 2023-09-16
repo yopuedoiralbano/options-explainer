@@ -518,7 +518,7 @@ def simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0, mu, sigma, n=24,
     
     st.plotly_chart(fig)
 
-return end_values
+    return end_values
 
 
 end_prices = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=1000, strike_threshold=210)
