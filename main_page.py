@@ -252,7 +252,7 @@ dice_strike = st.slider("Select the strike price of the option", 1, 6, 3)
 # Generate random dice rolls
 rolls = [roll_dice() for _ in range(1000)]
 
-hist, bin_edges = np.histogram(rolls, bins=6, range=(1, 6))
+hist, bin_edges = np.histogram(rolls, bins=6, range=(1, 7))
 
 # Define colors based on bin values
 colors = ['green' if bin_value > dice_strike else 'red' for bin_value in bin_edges[1:]]
