@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 st.title("Options Explainer")
 
 
-st.write("""## 1 minute: Key Idea
+st.write("""## Key Idea of Options
 
 Options let us express beliefs on how wiggly the price of a stock is (also known as its 'volatility')
 
@@ -25,22 +25,22 @@ The coupons **expire in 1 month**, so you have some time to decide to use the co
 These coupons have:
 - **a price** (you have to pay money for the coupon)
 - **a way to transact** (you get to buy something for a specified price)
-- **an underlying asset** (you get to buy LeBrons)
-- **an expiry date** (you get to buy LeBrons until 1 month from now)
-- **a price to transact at** (you get to buy LeBrons at 200 dollars until 1 month from now)
+- **an underlying asset** (you get to buy a pair of LeBrons)
+- **an expiry date** (you get to buy a pair of LeBrons until 1 month from now)
+- **a price to transact at** (you get to buy a pair LeBrons at 200 dollars until 1 month from now)
 - **a quantity** (you get to buy 2 pairs of LeBrons at 200 dollars each until 1 month from now)
 
 You decide to buy some coupons
 
 How do we know how much these coupons are worth? 
 
-If the Lebrons cost 190 dollars each right now, do you really want to use the coupon? Probably not, since you can just buy the shoes from Nike instead. So the coupon likely isn’t worth much. 
+If a pair of Lebrons cost 190 dollars each right now, do you really want to use the coupon? Probably not, since you can just buy the shoes from Nike instead. So the coupon likely isn’t worth much. 
 
 But let’s say LeBron wins the finals with the Lakers next week (hypothetically). Suddenly, the LeBrons are flying off the shelves, and Nike jacks up the prices to 300 dollars a pair!
 
 How are we feeling? Pretty good I’d imagine! We can buy each pair of LeBrons for 100 dollars off the retail price.
 
-Since we expect there's a lot of people willing to buy the shoe, we might even buy the 2 pairs of shoes for 200 dollars, and sell them to someone else for 300 dollars each. 
+Since we expect there's a lot of people willing to buy the shoe, we might even buy the 2 pairs of shoes for 200 dollars each, and sell them to someone else for 300 dollars each. 
 This means we'd make 190 dollars! 
 
 Can you see why? 
@@ -121,6 +121,9 @@ fig2.update_layout(
 st.plotly_chart(fig2)
 
 st.write("""
+
+### Another Kind of Option
+
 Now that we've done some exploration, let's talk about another variant of an option. 
 
 Imagine instead of being able to buy an object for a specified price before some specified expiration date, we can sell an object instead. 
@@ -129,6 +132,14 @@ For example, imagine you have a designer handbag that a coworker of yours has al
 
 She's saving up for her own bag, but she's willing to buy your bag off of you anytime within the next year, for 1500 dollars. 
 She'll guarantee to do this trade with you, if you pay her 100 dollars up front. 
+
+Like before, this deal has:
+- **a price** (you have to pay money to guarantee the deal)
+- **a way to transact** (you get to sell something for a specified price)
+- **an underlying asset** (you get to sell your handbag)
+- **an expiry date** (you get to sell handbags until 1 year from now)
+- **a price to transact at** (you get to sell handbags at 1500 dollars until 1 year from now)
+- **a quantity** (you get to buy 1 handbag at 1500 dollars each until 1 year from now)
 
 The handbag is worth 2000 dollars right now, so you have no reason to sell it to her for 1500 dollars. 
 But like before with the LeBron shoes - something might happen that could cause your handbag's value to drop dramatically. 
@@ -183,6 +194,8 @@ st.plotly_chart(fig_bag)
 
 st.write("""
 
+### Terminology
+
 What we've just described here are call and put options. 
 
 Like with the Nike Coupons, Call Options allow you to buy a fixed amount of some asset (for example, stocks), at a specified price until an expiration date.
@@ -211,7 +224,9 @@ LeBron 30DTE 200c @ 10 dollars
 
 Handbag 365DTE 1500p @ 100 dollars
 
-What does any of this have to do with volatility? 
+### How much are options worth, exactly?
+
+What does any of this have to do with the key idea of volatility? 
 
 Well, it mostly comes from how we price these options
 
@@ -223,21 +238,18 @@ How much should the 4 dollar strike be worth (or what is its premium)?
 
 Let's say that the multiplier is 1 (just one die) and that the expiration is after the dice is rolled, and its price is determined. 
 
-One way that we typically figure out a 'fair' value for an asset is by calculating the expected value of the asset. 
+Pretend it's worth 1 cent. Seems a bit cheap, right? We could buy it for a cent a bunch of times, and expect to make more than a cent most of the time - so that's probably wrong. 
 
-We know that any time the die rolls below or at 4, we wouldn't make any money. We also wouldn't lose any money, since we just wouldn't use our option to buy the die for 4 dollars. 
+Let's pretend it's worth 3 dollars. 
+That seems a bit high, we could sell it to someone at that price a bunch of times and expect to make money most of the time, since it's never going to pay out more than 3 dollars. 
 
-We also know that if the die rolls a 5, we could make 1 dollar on our call. Similarly, if the die rolls a 6, we could make 2 dollars on our call. 
+So the answer is somewhere in between these bounds. 
 
-So 1/6 of the time, we make 1 dollar, and 1/6 of the time, we make 2 dollars. 
+We can try to figure out how much the option is worth by simulating the dice roll a bunch of times, and finding the average value of the option over time.
 
-We sum our profit, weighted by the probability it happens, so we do 1/6 * 1 + 1/6 * 2, which amounts to 1/2. 
+Let's roll a dice 100,000 times, and plot a histogram of the rolls that we get
 
-So the fair price of this dice 4 dollar call should be 0.5 dollars. 
-
-We can visualize this as a histogram of outcomes: 
-
-We'll roll a dice 1000 times, and plot a histogram of the rolls that we get
+We'll also plot out the payoff, or profit, of having that option for each roll.
 
 """)
 
@@ -314,15 +326,13 @@ for i in range(len(probabilities)):
     else:
         latex_string_dice += f"{probabilities[i]} \\times {bin_edges_payoffs[i]} + "
         
-    
+
 st.latex(latex_string_dice)
 
+for i in range(6-strike):
+    
 
-
-
-st.write("""TODO: visualize the die call option
-ideal visualization: histogram colored such that the values above 4 are green and the others aren't
-give students a slider to change the strike and see how the fair value changes
+st.write("""
 
 This is pretty much how options are priced in the real world, on just about any asset!
 
@@ -333,8 +343,6 @@ do the thing where we plot a spaghetti chart of possible stock price series
 Explain Theta is just time value - more time increases width of distribution and amount of distribution above strike
 Explain Delta, higher starting price means more likely to end profitable
 Explain Vega, higher volatility means wider range of distribution and more likely to end profitable
-
-
 
 MAYBE: 
 put call parity
