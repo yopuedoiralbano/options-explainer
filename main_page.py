@@ -277,9 +277,9 @@ fig_dice.update_layout(
 # Display the histogram
 st.plotly_chart(fig_dice)
 
-dice_payoffs = [roll-dice_strike if roll > dice_strike else 0 for roll in rolls ]
+dice_payoffs = [roll-dice_strike if roll > dice_strike else 0 for roll in rolls]
 
-hist_payoffs, bin_edges_payoffs = np.histogram(dice_payoffs, bins=7-dice_strike, range=(0, 6-dice_strike))
+hist_payoffs, bin_edges_payoffs = np.histogram(dice_payoffs, bins=7-dice_strike, range=(0, 7-dice_strike))
 
 # Define colors based on bin values
 colors_dice_payoffs = ['green' if bin_value > 0 else 'red' for bin_value in bin_edges_payoffs[0:]]
