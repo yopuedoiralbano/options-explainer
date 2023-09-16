@@ -588,7 +588,7 @@ sigma_input = st.slider(
     0, 25, 5)
 
 end_prices_interactive, strike_val_input = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=s0_input, 
-                                                                                                   mu=mu_input/1e4, sigma=sigma_input/1e3, 
+                                                                                                   mu=0.0005, sigma=sigma_input/1e3, 
                                                                                                    n=24, T=time_to_expiry_input, 
                                                                                                    num_paths=200, 
                                                                                                    strike_threshold=strike_val_input)
