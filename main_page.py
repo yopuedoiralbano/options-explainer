@@ -100,6 +100,13 @@ premium_input = st.slider(
     'Select the price we paid for the coupon!',
     0, 1000, 10)
 
+st.write(type(min_max_price_input))
+st.write(type(min_max_price_input[0]))
+st.write(type(min_max_price_input[1]))
+st.write(type(step_size_input))
+
+
+
 
 
 underlying_prices_shoes = np.linspace(min_max_price_input[0], min_max_price_input[1], {(min_max_price_input[1]-min_max_price_input[0])/step_size_input})
