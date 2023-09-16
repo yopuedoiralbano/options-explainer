@@ -60,15 +60,15 @@ max_price = 400
 strike_price = 200
 premium = 10
 
-underlying_prices = np.linspace(min_price, max_price, 8)
+underlying_prices_plot = np.linspace(min_price, max_price, 8)
 
 def calculate_long_call_payoff(underlying_price, strike_price, premium):
     payoffs = np.where(underlying_prices <= strike_price, -premium, (underlying_prices - strike_price) - premium)
     return payoffs
 
-payoffs = calculate_long_call_payoff(underlying_prices, strike_price, premium)
+payoffs_plot = calculate_long_call_payoff(underlying_prices, strike_price, premium)
 
-fig = px.line(x=underlying_prices, y=payoffs, labels={"x": "LeBron Shoe Value", "y": "Profit"})
+fig = px.line(x=underlying_prices_plot, y=payoffs_plot, labels={"x": "LeBron Shoe Value", "y": "Profit"})
 fig.update_layout(
     title=f"Coupon Profit Diagram",
     xaxis_title="LeBron Shoe Value",
@@ -106,8 +106,8 @@ underlying_prices_shoes = np.linspace(min_max_price_input[0], min_max_price_inpu
 
 payoffs_shoes = calculate_long_call_payoff(underlying_prices_shoes, strike_price_input, premium_input)
 
-st.write(underlying_prices)
-st.write(payoffs)
+st.write(underlying_prices_plot)
+st.write(payoffs_plot)
 st.write(underlying_prices_shoes)
 st.write(payoffs_shoes)
 
