@@ -45,10 +45,8 @@ premium = 10
 underlying_prices = np.linspace(min_price, max_price, 9)
 
 def calculate_long_call_payoff(underlying_price, strike_price, premium):
-    if underlying_price <= strike_price:
-        return -premium  
-    else:
-        return (underlying_price - strike_price) - premium  
+    payoffs = np.where(underlying_prices <= strike_price, -premium, (underlying_prices - strike_price) - premium)
+    return payoffs
 
 # Calculate the option strategy payoffs for each price point
 payoffs = calculate_long_call_payoff(underlying_prices, strike_price, premium)
