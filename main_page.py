@@ -1,6 +1,8 @@
 import streamlit as st
 import numpy as np
 import plotly.express as px
+import plotly.graph_objects as go
+
 
 # Define the Streamlit app
 st.title("Options Explainer")
