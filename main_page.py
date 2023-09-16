@@ -93,6 +93,8 @@ This is pretty cool! Looks like we have a ton of upside (potentially infinite), 
 
 Play around with the parameters a bit, try to answer the following questions/do the following:
 
+TODO: make simulations load faster, whole page reloads whenever you change a parameter so i would like to isolate that somehow
+
 TODO: make these exploration questions better lol
 
 - what happens when the coupon price is above the maximum of the price range?
