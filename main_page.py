@@ -334,11 +334,12 @@ st.write("""
 Now we can calculate the average price of the option over the 100,000 rolls, and that should be pretty close to what the option is actually worth!
 
 We multiply each payoff by the probability of getting each of the payoffs, and add them all together
+
+So for each outcome $i$
 """)
 
 st.latex('''
-\\sum_i^n
-\\text{probability of outcome i} \\times {payoff of outcome i} + \\text{probability of outcome i} \\times {payoff of outcome i}''')
+\\sum_i^n \\text{probability of outcome i} \\times \\text{payoff of outcome i}''')
 
 st.latex(latex_string_dice)
 
