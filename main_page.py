@@ -568,11 +568,11 @@ time_to_expiry_input = st.slider(
 
 mu_input = st.slider(
     'Select how much the stock trends up or down!',
-    -10, 10, 5)
+    -100, 100, 5)
 
 sigma_input = st.slider(
     'Select how volatile the stock is!',
-    0, 20, 5)
+    0, 200, 5)
 
 end_prices_interactive, strike_val_input = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=s0_input, 
                                                                                                    mu=mu_input/1e4, sigma=sigma_input/1e3, 
