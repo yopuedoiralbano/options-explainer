@@ -18,11 +18,11 @@ Let’s say Nike is selling coupons for a pair of basketball shoes. They’re se
 
 These coupons have:
 
-- a way to transact (you get to buy something for a specified price)
-- an underlying asset (you get to buy LeBrons)
-- an expiry date (you get to buy LeBrons until 1 month from now)
-- a price to transact at (you get to buy LeBrons at 200 dollars until 1 month from now)
-- a quantity (you get to buy 2 pairs of LeBrons at 200 dollars until 1 month from now)
+- **a way to transact** (you get to buy something for a specified price)
+- **an underlying asset** (you get to buy LeBrons)
+- **an expiry date** (you get to buy LeBrons until 1 month from now)
+- **a price to transact at** (you get to buy LeBrons at 200 dollars until 1 month from now)
+- **a quantity** (you get to buy 2 pairs of LeBrons at 200 dollars until 1 month from now)
 
 How do we know how much these coupons are worth? 
 
@@ -60,7 +60,7 @@ def calculate_long_call_payoff(underlying_price, strike_price, premium):
 payoffs = calculate_long_call_payoff(underlying_prices, strike_price, premium)
 
 # Create a Plotly figure
-fig = px.line(x=underlying_prices, y=payoffs, labels={"x": "Underlying Asset Price", "y": "Payoff"})
+fig = px.line(x=underlying_prices, y=payoffs, labels={"x": "LeBron Shoe Value", "y": "Profit"})
 fig.update_layout(
     title=f"Coupon Profit Diagram",
     xaxis_title="LeBron Shoe Value",
@@ -69,3 +69,5 @@ fig.update_layout(
 
 # Display the Plotly figure in Streamlit
 st.plotly_chart(fig)
+
+
