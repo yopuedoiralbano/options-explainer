@@ -651,7 +651,15 @@ If we know an option's volatility, we can work out what the price of the option 
 
 Vice versa, if we know the price of an option, we can work out the 'implied volatility' of an option. 
 
+This is why options are so intertwined with our beliefs about the volatility of a stock.
 
+If we think a stock should be more volatile than the 'implied volatility' that the option tells us, we should buy the option!
+
+This is because if the volatility that ends up occurring is higher than what the market predicted, the option is more valuable on average, so we make money!
+
+Likewise, if we think that the market's 'implied volatility' of an option is lower than what we think, we should sell the option!
+
+Now, if the volatility that ends up occurring is lower than what the market predicted, the option will be less valuable on average, so we make money!
 
 
 MAYBE: 
