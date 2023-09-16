@@ -282,7 +282,7 @@ dice_payoffs = [roll-dice_strike if roll > dice_strike else 0 for roll in rolls 
 hist_payoffs, bin_edges_payoffs = np.histogram(dice_payoffs, bins=7-dice_strike, range=(0, 6-dice_strike))
 
 # Define colors based on bin values
-colors_dice_payoffs = ['green' if bin_value > dice_strike else 'red' for bin_value in bin_edges[0:]]
+colors_dice_payoffs = ['green' if bin_value > 0 else 'red' for bin_value in bin_edges_payoffs[0:]]
 
 # Create a bar chart using Plotly
 fig_dice_payoff = go.Figure()
