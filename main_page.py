@@ -424,7 +424,7 @@ def simulate_gbm_paths_plotly_with_histogram(s0, mu, sigma, n=24, T=30, num_path
         X = (mu-0.5*sigma**2)*t + sigma*W
         S[i,:] = s0*np.exp(X)
         
-    fig = make_subplots(rows=1, cols=2, column_widths=[0.7, 0.3])
+    fig = make_subplots(rows=1, cols=2, subplot_titles=('GBM Paths', 'End Value Histogram'))
     
     # Add GBM paths to the first subplot
     for i in range(num_paths):
@@ -439,14 +439,13 @@ def simulate_gbm_paths_plotly_with_histogram(s0, mu, sigma, n=24, T=30, num_path
         title='Simulated Geometric Brownian Motion Paths with End Value Histogram',
         xaxis_title='Time',
         yaxis_title='Price',
-        xaxis2=dict(domain=[0.75, 1.0]),
-        yaxis2=dict(anchor='x2'),
-        showlegend=True,
+        showlegend=False,  # Set to False to avoid legend duplication
         width=1000,
         height=500,
     )
     
     st.plotly_chart(fig.show())
+
 
 simulate_gbm_paths_plotly_with_histogram(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=10)
 
