@@ -255,12 +255,12 @@ rolls = [roll_dice() for _ in range(1000)]
 hist, bin_edges = np.histogram(rolls, bins=6, range=(1, 7))
 
 # Define colors based on bin values
-colors = ['green' if bin_value > dice_strike else 'red' for bin_value in bin_edges[1:]]
+colors = ['green' if bin_value > dice_strike else 'red' for bin_value in bin_edges[0:]]
 
 # Create a bar chart using Plotly
 fig_dice = go.Figure()
 fig_dice.add_trace(go.Bar(
-    x=bin_edges[1:],
+    x=bin_edges[0:],
     y=hist,
     marker_color=colors,
     text=hist,
