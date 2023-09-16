@@ -249,7 +249,6 @@ We can try to figure out how much the option is worth by simulating the dice rol
 
 Let's roll a dice 100,000 times, and plot a histogram of the rolls that we get
 
-We'll also plot out the payoff, or profit, of having that option for each roll.
 
 """)
 
@@ -288,6 +287,11 @@ fig_dice.update_layout(
 
 # Display the histogram
 st.plotly_chart(fig_dice)
+
+st.write("""We'll also plot out the payoff, or profit, of having that option for each roll:
+
+Red means the option ended up being worth 0 after the die roll, and green means it was worth a positive amount, denoted by the value at the bottom of the bar
+""")
 
 dice_payoffs = [roll-dice_strike if roll > dice_strike else 0 for roll in rolls]
 
@@ -328,8 +332,6 @@ for i in range(len(probabilities)):
         
 
 st.latex(latex_string_dice)
-
-    
 
 st.write("""
 
