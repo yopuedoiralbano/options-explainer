@@ -521,7 +521,7 @@ def simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0, mu, sigma, n=24,
     return end_values, strike_threshold
 
 
-end_prices, strike_value = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=1000, strike_threshold=205)
+end_prices, strike_value = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=1000, strike_threshold=210)
 
 st.write("""
 
@@ -529,18 +529,63 @@ st.write("""
 
 Let's not look at the calculation exactly here, since it would be a bit long, but the price would be: """)
 
-
 def call_option_asset(end_values, strike_value):
     payoffs = end_values - strike_value
     payoffs = np.clip(payoffs, 0, None)
+
+    st.latex(payoffs.mean())
     return payoffs.mean()
 
-theo = call_option_asset(end_prices, strike_value)
-
-
-st.latex(theo)
+call_option_asset(end_prices, strike_value)
 
 st.write(""" 
+
+There's a bunch of parameters here that can change the distribution and the final price a lot, here's your chance to get a feel for it!
+
+Start by playing around with one at a time, and then observe the relationships between them:
+
+Current Price of Stock
+
+Strike Price
+
+Time to Expiry
+
+Stock Drift (does it tend to go up or down?)
+
+Stock Volatility (how wiggly is the stock?)""")
+
+s0_input = st.slider(
+    'Select the price the stock is currently at!',
+    100, 1000, 200)
+
+strike_val_input = st.slider(
+    'Select the strike price of the option!',
+    0, 1000, 200)
+
+time_to_expiry_input = st.slider(
+    'Select the amount of days until the stock expires!',
+    1, 90, 30)
+
+mu_input = st.slider(
+    'Select how much the stock trends up or down!',
+    -0.001, 0.001, 0.0005)
+
+sigma_input = st.slider(
+    'Select how volatile the stock is!',
+    0, 0.002, 0.005)
+
+end_prices_interactive, strike_val_input = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=s0_input, 
+                                                                                                   mu=mu_input, sigma=sigma_input, 
+                                                                                                   n=24, T=time_to_expiry_input, 
+                                                                                                   num_paths=1000, 
+                                                                                                   strike_threshold=strike_val_input)
+
+call_option_asset(end_prices_interactive, strike_val_input)
+
+st.write("""
+
+...
+
 
 
 
