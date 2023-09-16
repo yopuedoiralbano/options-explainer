@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
+import plotly.subplots as sp
 
 
 # Define the Streamlit app
@@ -424,7 +424,7 @@ def simulate_gbm_paths_plotly_with_histogram(s0, mu, sigma, n=24, T=30, num_path
         X = (mu-0.5*sigma**2)*t + sigma*W
         S[i,:] = s0*np.exp(X)
         
-    fig = make_subplots(rows=1, cols=2, subplot_titles=('GBM Paths', 'End Value Histogram'))
+    fig = sp.make_subplots(rows=1, cols=2, subplot_titles=('GBM Paths', 'End Value Histogram'))
     
     # Add GBM paths to the first subplot
     for i in range(num_paths):
@@ -444,8 +444,7 @@ def simulate_gbm_paths_plotly_with_histogram(s0, mu, sigma, n=24, T=30, num_path
         height=500,
     )
     
-    st.plotly_chart(fig.show())
-
+    fig.show()
 
 simulate_gbm_paths_plotly_with_histogram(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=10)
 
