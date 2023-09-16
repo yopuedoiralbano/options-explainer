@@ -36,7 +36,9 @@ Since we expect there's a lot of people willing to buy the shoe, we might even b
 This means we'd make 200 dollars! 
 Can you see why? 
 
-(300-200)x2 = (100)x2 = 200 
+\[
+(300 - 200) \times 2 = 100 \times 2 = 200
+\]
 
 So if we know the coupon is expiring today, we can pretty easily plot out the profit we might get from using it as a function of Nike's retail price.
 
