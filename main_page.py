@@ -518,10 +518,10 @@ def simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0, mu, sigma, n=24,
     
     st.plotly_chart(fig)
 
-    return end_values
+    return end_values, strike_value
 
 
-end_prices = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=1000, strike_threshold=210)
+end_prices, strike_value = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=1000, strike_threshold=210)
 
 st.write("""
 
@@ -530,12 +530,12 @@ st.write("""
 Let's not look at the calculation exactly here, since it would be a bit long, but the price would be: """)
 
 
-def call_option_asset(end_values):
-    payoffs = end_values - strike_price
+def call_option_asset(end_values, strike_value):
+    payoffs = end_values - strike_value
     payoffs = np.clip(payoffs, 0, None)
     return payoffs.mean()
 
-theo = call_option_asset(end_prices)
+theo = call_option_asset(end_prices, strike_value)
 
 
 st.latex(theo)
