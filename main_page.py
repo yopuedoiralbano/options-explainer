@@ -444,7 +444,7 @@ def simulate_gbm_paths_plotly_with_histogram(s0, mu, sigma, n=24, T=30, num_path
         height=500,
     )
     
-    fig.show()
+    st.plotly_chart(fig.show())
 
 simulate_gbm_paths_plotly_with_histogram(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=10)
 
