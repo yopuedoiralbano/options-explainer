@@ -410,8 +410,7 @@ def simulate_gbm_paths(s0, mu, sigma, n=24, T=30, num_paths=1000, plot=True):
 
 simulate_gbm_paths(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=10, plot=True)
 
-import numpy as np
-import plotly.graph_objs as go
+
 
 def simulate_gbm_paths_plotly_with_histogram(s0, mu, sigma, n=24, T=30, num_paths=1000):
     dt = 1/n
@@ -444,7 +443,7 @@ def simulate_gbm_paths_plotly_with_histogram(s0, mu, sigma, n=24, T=30, num_path
         height=500,
     )
     
-    st.plotly_chart(fig.show())
+    st.plotly_chart(fig)
 
 simulate_gbm_paths_plotly_with_histogram(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=10)
 
