@@ -530,7 +530,7 @@ st.write("""
 Let's not look at the calculation exactly here, since it would be a bit long, but the price would be: """)
 
 
-def call_option_asset(asset, end_values):
+def call_option_asset(end_values):
     payoffs = end_values - strike_price
     payoffs = np.clip(payoffs, 0, None)
     return payoffs.mean()
