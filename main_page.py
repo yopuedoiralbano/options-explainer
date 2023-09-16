@@ -269,7 +269,7 @@ fig_dice.add_trace(go.Bar(
 
 # Update the layout
 fig_dice.update_layout(
-    title=f"Dice Roll Histogram (Threshold: {dice_strike})",
+    title=f"Dice Roll Histogram (Strike Price: {dice_strike})",
     xaxis_title="Dice Value",
     yaxis_title="Frequency"
 )
@@ -302,6 +302,10 @@ fig_dice_payoff.update_layout(
 )
 
 st.plotly_chart(fig_dice_payoff)
+
+probabilities = hist_payoffs / np.sum(hist_payoffs)
+expected_value = np.sum((bin_edges_payoffs[:-1] + bin_edges_payoffs[1:]) / 2 * probabilities)
+st.write(expected_value)
 
 
 
