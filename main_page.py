@@ -277,6 +277,32 @@ fig_dice.update_layout(
 # Display the histogram
 st.plotly_chart(fig_dice)
 
+dice_payoffs = [roll-dice_strike if roll > dice_strike else 0 for roll in rolls ]
+
+hist, bin_edges = np.histogram(dice_payoffs, bins=7-dice_strike, range=(0, 6-dice_strike))
+
+# Define colors based on bin values
+colors = ['green' if bin_value > dice_strike else 'red' for bin_value in bin_edges[0:]]
+
+# Create a bar chart using Plotly
+fig_dice = go.Figure()
+fig_dice.add_trace(go.Bar(
+    x=bin_edges[0:],
+    y=hist,
+    marker_color=colors,
+    text=hist,
+    textposition='outside'
+))
+
+# Update the layout
+fig_dice.update_layout(
+    title=f"Dice Call Option Payoff Histogram (Strike Price: {dice_strike})",
+    xaxis_title="Option Payoff",
+    yaxis_title="Frequency"
+)
+
+
+
 
 st.write("""TODO: visualize the die call option
 ideal visualization: histogram colored such that the values above 4 are green and the others aren't
