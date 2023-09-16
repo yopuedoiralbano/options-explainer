@@ -82,6 +82,7 @@ st.write("""
 This is pretty cool! Looks like we have a ton of upside, and not very much downside. 
 
 Play around with the parameters a bit if you'd like: 
+---
 """)
 
 min_max_price_input = st.slider(
