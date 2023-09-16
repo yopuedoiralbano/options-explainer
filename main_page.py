@@ -66,7 +66,7 @@ def calculate_long_call_payoff(underlying_price, strike_price, premium):
     payoffs = np.where(underlying_prices <= strike_price, -premium, (underlying_prices - strike_price) - premium)
     return payoffs
 
-payoffs_plot = calculate_long_call_payoff(underlying_prices, strike_price, premium)
+payoffs_plot = calculate_long_call_payoff(underlying_prices_plot, strike_price, premium)
 
 fig = px.line(x=underlying_prices_plot, y=payoffs_plot, labels={"x": "LeBron Shoe Value", "y": "Profit"})
 fig.update_layout(
