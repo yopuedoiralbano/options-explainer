@@ -49,7 +49,7 @@ st.write("""
 Generalizing this formula:
 """)
 
-st.latex('''(\\text{Nike Price} - \\text{Coupon Price}) \\times (n \\text{ pairs of shoes per coupon}) - (\\text{coupon price})''')
+st.latex('''(\\text{Nike Price} - \\text{Discounted Price}) \\times (n \\text{ pairs of shoes per coupon}) - (\\text{coupon price})''')
 
 
 st.write("""
@@ -94,7 +94,7 @@ TODO: make these exploration questions better lol
 """)
 
 strike_price_input = st.slider(
-    'Select the coupon price to buy shoes at!',
+    'Select the discounted price to buy shoes at!',
     0, 1000, 200)
 
 premium_input = st.slider(
