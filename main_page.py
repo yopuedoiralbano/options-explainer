@@ -408,11 +408,12 @@ def simulate_gbm_paths(s0, mu, sigma, n=24, T=30, num_paths=1000, plot=True):
         st.plotly_chart(fig_paths)
 
 
-simulate_gbm_paths(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=10, plot=True)
+#simulate_gbm_paths(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=10, plot=True)
 
 
 
-def simulate_gbm_paths_plotly_with_histogram(s0, mu, sigma, n=24, T=30, num_paths=1000):
+
+def simulate_gbm_paths_plotly_histogram_with_bins(s0, mu, sigma, n=24, T=30, num_paths=1000, num_bins=20):
     dt = 1/n
     t = np.linspace(0, T, n*T+1)
     S = np.zeros((num_paths, n*T+1))
@@ -422,22 +423,30 @@ def simulate_gbm_paths_plotly_with_histogram(s0, mu, sigma, n=24, T=30, num_path
         W = np.cumsum(W)*np.sqrt(dt)
         X = (mu-0.5*sigma**2)*t + sigma*W
         S[i,:] = s0*np.exp(X)
-        
-    fig = sp.make_subplots(rows=1, cols=2, subplot_titles=('GBM Paths', 'End Value Histogram'))
+    
+    # Calculate end values
+    end_values = S[:, -1]
+    
+    # Calculate histogram data
+    hist_values, bin_edges = np.histogram(end_values, bins=num_bins)
+    
+    # Create subplots with one row and two columns
+    fig = make_subplots(rows=1, cols=2, subplot_titles=('GBM Paths', 'End Value Histogram'))
     
     # Add GBM paths to the first subplot
     for i in range(num_paths):
         fig.add_trace(go.Scatter(x=t, y=S[i,:], mode='lines', name=f'Path {i+1}'), row=1, col=1)
     
-    # Calculate end values and add a histogram to the second subplot
-    end_values = S[:, -1]
-    fig.add_trace(go.Histogram(x=end_values, name='End Values'), row=1, col=2)
+    # Add a bar chart with bins and counts to the second subplot
+    fig.add_trace(go.Bar(y=bin_edges[:-1], x=hist_values, orientation='h', name='End Values'), row=1, col=2)
     
     # Update layout
     fig.update_layout(
-        title='Simulated Geometric Brownian Motion Paths with End Value Histogram',
-        xaxis_title='Time',
+        title='Simulated Geometric Brownian Motion Paths with Histogram and Bins',
+        xaxis_title='Counts',
         yaxis_title='Price',
+        xaxis2=dict(domain=[0.75, 1.0]),
+        yaxis2=dict(anchor='x2'),
         showlegend=False,  # Set to False to avoid legend duplication
         width=1000,
         height=500,
@@ -445,7 +454,7 @@ def simulate_gbm_paths_plotly_with_histogram(s0, mu, sigma, n=24, T=30, num_path
     
     st.plotly_chart(fig)
 
-simulate_gbm_paths_plotly_with_histogram(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=10)
+simulate_gbm_paths_plotly_with_histogram(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=1000)
 
 # Example usage:
 # simulate_gbm_paths_plotly_with_histogram(s0=100, mu=0.05, sigma=0.2, n=24, T=30, num_paths=5)
