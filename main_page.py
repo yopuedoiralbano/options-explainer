@@ -54,19 +54,19 @@ So if we know the coupon is expiring today, we can pretty easily plot out the pr
 """)
 
 
-min_price = 50
-max_price = 400
+min_price_initial = 50
+max_price_initial = 400
 
-strike_price = 200
-premium = 10
+strike_price_initial = 200
+premium_initial = 10
 
-underlying_prices_plot = np.linspace(min_price, max_price, 8)
+underlying_prices_plot = np.linspace(min_price_initial, max_price_initial, 8)
 
-def calculate_long_call_payoff(underlying_price, strike_price, premium):
+def calculate_long_call_payoff(underlying_prices, strike_price, premium):
     payoffs = np.where(underlying_prices <= strike_price, -premium, (underlying_prices - strike_price) - premium)
     return payoffs
 
-payoffs_plot = calculate_long_call_payoff(underlying_prices_plot, strike_price, premium)
+payoffs_plot = calculate_long_call_payoff(underlying_prices_plot, strike_price_initial, premium_initial)
 
 fig = px.line(x=underlying_prices_plot, y=payoffs_plot, labels={"x": "LeBron Shoe Value", "y": "Profit"})
 fig.update_layout(
