@@ -376,6 +376,36 @@ We'll skip over some of the technical detail on how exactly we're going to simul
 
 """)
 
+def simulate_gbm_paths(s0, mu, sigma, n=24, T=30, num_paths=1000, plot=True):
+    dt = 1/n
+    t = np.linspace(0, T, n*T+1)
+    S = np.zeros((num_paths, n*T+1))
+    
+    for i in range(num_paths):
+        W = np.random.standard_normal(size=n*T+1)
+        W = np.cumsum(W)*np.sqrt(dt)
+        X = (mu-0.5*sigma**2)*t + sigma*W
+        S[i,:] = s0*np.exp(X)
+        
+        
+    fig_paths = go.Figure()
+    for i in range(num_paths):
+        fig_paths.add_trace(go.Scatter(x=t, y=S[i,:], mode='lines', name=f'Path {i+1}'))
+
+    fig_paths.update_layout(
+        title='Simulated Geometric Brownian Motion Paths',
+        xaxis_title='Time',
+        yaxis_title='Price',
+        showlegend=True,
+        width=800,
+        height=500,
+    )
+    
+    fig_paths.show()
+
+
+simulate_gbm_paths(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=100)
+
 
 
 st.write("""
