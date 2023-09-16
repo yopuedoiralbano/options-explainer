@@ -191,10 +191,13 @@ They're called 'options' because you don't have to do them! If the LeBrons had n
 
 Let's quickly go over some terminology, so that everyone is on the same page. 
 
-The specified price that we transact at in an option is its **STRIKE PRICE**
-The price that we pay for an option is its **PREMIUM**
-The amount of the asset that we trade in an option is its **MULTIPLIER**
-The expiration date is the ... **EXPIRATION DATE** (no fancy name here)
+- The specified price that we transact at in an option is its **STRIKE PRICE**
+
+- The price that we pay for an option is its **PREMIUM**
+
+- The amount of the asset that we trade in an option is its **MULTIPLIER**
+
+- The expiration date is the ... **EXPIRATION DATE** (no fancy name here)
 
 We can describe an option by using the following structure
 
@@ -202,8 +205,9 @@ We can describe an option by using the following structure
 
 Think about what the options we talked about earlier might be described as
 
-LeBron 30DTE 200c @ $10
-Handbag 365DTE 1500p @ $100
+LeBron 30DTE 200c @ 10 dollars
+
+Handbag 365DTE 1500p @ 100 dollars
 
 What does any of this have to do with volatility? 
 
@@ -229,27 +233,28 @@ We sum our profit, weighted by the probability it happens, so we do 1/6 * 1 + 1/
 
 So the fair price of this dice 4 dollar call should be 0.5 dollars. 
 
-We can visualize this as a histogram of outcomes: """)
+We can visualize this as a histogram of outcomes: 
+
+We'll roll a dice 1000 times, and plot a histogram of the rolls that we get
+
+""")
 
 
 
 def roll_dice():
     return np.random.randint(1, 7)
 
-# Streamlit UI
-st.title("Dice Roll Histogram")
 
-# Sidebar to set the threshold 'x'
-x = st.sidebar.slider("Select the threshold 'x'", 1, 6, 3)
+dice_strike = st.slider("Select the strike price 'x'", 1, 6, 3)
 
 # Generate random dice rolls
 rolls = [roll_dice() for _ in range(1000)]
 
 # Create a histogram
-hist_fig = px.histogram(rolls, nbins=6, range_x=[1, 7], title=f"Dice Roll Histogram (Threshold: {x})")
+hist_fig = px.histogram(rolls, nbins=6, range_x=[1, 7], title=f"Dice Roll Histogram (Strike: {dice_strike})")
 hist_fig.update_xaxes(title_text="Dice Value")
 hist_fig.update_yaxes(title_text="Frequency")
-hist_fig.update_traces(marker_color=['green' if roll >= x else 'red' for roll in rolls])
+hist_fig.update_traces(marker_color=['green' if roll > dice_strike else 'red' for roll in rolls])
 
 # Display the histogram
 st.plotly_chart(hist_fig)
