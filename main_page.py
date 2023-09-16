@@ -38,13 +38,13 @@ Can you see why?
 
 """)
 
-st.latex('''(300-200) \times 2 = 100 \times 2 = 200''')
+st.latex('''(300-200) \\times 2 = 100 \\times 2 = 200''')
 
 st.write("""
 Generalizing this formula:
 """)
 
-st.latex('''(\text{Nike Price} - \text{Coupon Price}) \times 2 \text{shoes per coupon}''')
+st.latex('''(\\text{Nike Price} - \\text{Coupon Price}) \\times 2 \\text{shoes per coupon}''')
 
 
 st.write("""
