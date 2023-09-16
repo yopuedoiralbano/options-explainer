@@ -423,24 +423,23 @@ def simulate_gbm_paths_plotly_with_histogram(s0, mu, sigma, n=24, T=30, num_path
         X = (mu-0.5*sigma**2)*t + sigma*W
         S[i,:] = s0*np.exp(X)
         
-    fig = go.Figure()
+    fig = make_subplots(rows=1, cols=2, column_widths=[0.7, 0.3])
+    
+    # Add GBM paths to the first subplot
     for i in range(num_paths):
-        fig.add_trace(go.Scatter(x=t, y=S[i,:], mode='lines', name=f'Path {i+1}'))
+        fig.add_trace(go.Scatter(x=t, y=S[i,:], mode='lines', name=f'Path {i+1}'), row=1, col=1)
     
+    # Calculate end values and add a histogram to the second subplot
     end_values = S[:, -1]
-    fig.add_trace(go.Histogram(x=end_values, name='End Values', xaxis='x2'))
+    fig.add_trace(go.Histogram(x=end_values, name='End Values'), row=1, col=2)
     
+    # Update layout
     fig.update_layout(
         title='Simulated Geometric Brownian Motion Paths with End Value Histogram',
         xaxis_title='Time',
         yaxis_title='Price',
-        xaxis2=dict(
-            domain=[0.8, 1.0],  # Adjust the position of the histogram
-            anchor='y1',
-        ),
-        yaxis2=dict(
-            anchor='x2',
-        ),
+        xaxis2=dict(domain=[0.75, 1.0]),
+        yaxis2=dict(anchor='x2'),
         showlegend=True,
         width=1000,
         height=500,
