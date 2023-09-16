@@ -349,9 +349,6 @@ put call parity
 
 second order greeks
 
-
-
-
 """)
 
 
