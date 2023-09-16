@@ -355,7 +355,6 @@ st.write(""" plugging in the values from the histogram above, we find that the s
 st.latex(latex_string_dice)
 
 st.write("""
-
 This is pretty much how options are priced in the real world, on just about any asset!
 
 1. Come up with a distribution of the possible prices of the asset on the day of the expiry.
@@ -540,35 +539,49 @@ call_option_asset(end_prices, strike_value)
 
 st.write(""" 
 
+### Price your own options! 
+
 There's a bunch of parameters here that can change the distribution and the final price a lot, here's your chance to get a feel for it!
 
 Start by playing around with one at a time, and then observe the relationships between them:
 
-Current Price of Stock
+Some questions to answer: 
 
-Strike Price
+How does the option value usually change as a function of the current price?
 
-Time to Expiry
+How does the option value usually change as a function of the strike price?
 
-Stock Drift (does it tend to go up or down?)
+How does the option value usually change as a function of the time to expiry?
 
-Stock Volatility (how wiggly is the stock?)""")
+How does the option value usually change as a function of the stock's volatility?
+
+""")
+
+st.write("""Current Price (what price is the stock at right now?)""")
 
 s0_input = st.slider(
     'Select the price the stock is currently at!',
     100, 1000, 200)
 
+
+st.write("""Strike Value (what price do we get the option to buy the stock at?)""")
+
 strike_val_input = st.slider(
     'Select the strike price of the option!',
     int(s0_input*0.8), int(s0_input*1.2), s0_input)
 
+st.write("""Time to Expiry (how many days until the option expires?)""")
+
 time_to_expiry_input = st.slider(
-    'Select the amount of days until the stock expires!',
+    'Select the amount of days until the option expires!',
     1, 90, 30)
 
-mu_input = st.slider(
-    'Select how much the stock trends up or down!',
-    -25, 25, 5)
+# st.write("""Stock Drift (does it tend to go up or down?)""")
+# mu_input = st.slider(
+#     'Select how much the stock trends up or down!',
+#     -25, 25, 5)
+
+st.write("""Stock Volatility (how wiggly are the price movements?)""")
 
 sigma_input = st.slider(
     'Select how volatile the stock is!',
@@ -577,24 +590,69 @@ sigma_input = st.slider(
 end_prices_interactive, strike_val_input = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=s0_input, 
                                                                                                    mu=mu_input/1e4, sigma=sigma_input/1e3, 
                                                                                                    n=24, T=time_to_expiry_input, 
-                                                                                                   num_paths=100, 
+                                                                                                   num_paths=200, 
                                                                                                    strike_threshold=strike_val_input)
 
 call_option_asset(end_prices_interactive, strike_val_input)
 
 st.write("""
 
-...
+### Lessons from Histograms
+
+What did you learn? 
+
+Well, you should've noticed the following
+
+1. Option Price Depends on the Current Price
+
+2. Option Price Depends on the Strike Price
+
+3. Option Price Depends on the Time to Expiry
+
+4. Option Price Depends on the Volatility of a Stock
+
+Intuitively, all of these should make sense!
+
+TODO: make these sentences better
+
+A better discount (or lower relative price to buy an asset at) should mean that a coupon is worth more than another coupon, because it's profitability threshold lower down on the range of prices possible, so the probability of it ending up profitable is higher!
+
+A coupon that expires later than another one should be more valuable than one that expires later, since price has more time to move around, causing the probability of it ending up profitable to be higher!
+
+A coupon that is for an asset that has a very jumpy price should be more valuable, because the range of prices it can reach is wider, so the probability of it ending up profitable is higher!
+
+These values are known as **Option Greeks**
+
+### What are Option Greeks? 
+
+Option greeks are just greek letters that represent how an option's price changes as some other variable changes
+
+The basic ones you need to know about are:
+
+Theta, Delta, and Vega:
+
+**Theta** is the time value of an option: since more time to expiry increases the width of the ending price distribution, so the probability of ending above the strike is higher
+
+**Delta** is the option's sensitivity to the stock price movement: as a stock goes up, its probability of ending above the strike is higher
+
+**Vega** is the option's sensitivity to volatility: as a stock gets more volatile, the width of its distribution increases, so the probability of ending above the strike is higher
+
+### Option Prices as a function of Volatility
+
+Notice how, at any given time, we will always know:
+- the option's strike price
+- the option's days to expiry
+- the stock's current price
+
+But what we don't know is:
+- the stock's volatility
+
+If we know an option's volatility, we can work out what the price of the option should be. 
+
+Vice versa, if we know the price of an option, we can work out the 'implied volatility' of an option. 
 
 
 
-
-
-do the thing where we plot a spaghetti chart of possible stock price series
-
-Explain Theta is just time value - more time increases width of distribution and amount of distribution above strike
-Explain Delta, higher starting price means more likely to end profitable
-Explain Vega, higher volatility means wider range of distribution and more likely to end profitable
 
 MAYBE: 
 put call parity
