@@ -305,6 +305,7 @@ st.plotly_chart(fig_dice_payoff)
 
 probabilities = hist_payoffs / np.sum(hist_payoffs)
 st.write(probabilities)
+st.write(bin_edges_payoffs)
 expected_value = np.sum((bin_edges_payoffs[:-1] + bin_edges_payoffs[1:]) / 2 * probabilities)
 st.write(expected_value)
 
