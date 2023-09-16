@@ -46,7 +46,7 @@ st.write("""
 Generalizing this formula:
 """)
 
-st.latex('''(\\text{Nike Price} - \\text{Coupon Price}) \\times 2 \\text{ shoes per coupon} - \\text{coupon price}''')
+st.latex('''(\\text{Nike Price} - \\text{Coupon Price}) \\times (n \\text{ shoes per coupon}) - (\\text{coupon price})''')
 
 
 st.write("""
