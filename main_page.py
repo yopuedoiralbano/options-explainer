@@ -106,6 +106,11 @@ underlying_prices_shoes = np.linspace(min_max_price_input[0], min_max_price_inpu
 
 payoffs_shoes = calculate_long_call_payoff(underlying_prices_shoes, strike_price_input, premium_input)
 
+st.write(underlying_prices)
+st.write(payoffs)
+st.write(underlying_prices_shoes)
+st.write(payoffs_shoes)
+
 fig2 = px.line(x=underlying_prices_shoes, y=payoffs_shoes, labels={"x": "LeBron Shoe Value", "y": "Profit"})
 fig2.update_layout(
     title=f"Coupon Profit Diagram",
