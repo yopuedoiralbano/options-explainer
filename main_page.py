@@ -55,12 +55,12 @@ So if we know the coupon is expiring today, we can pretty easily plot out the pr
 
 
 min_price = 50
-max_price = 500
+max_price = 400
 
 strike_price = 200
 premium = 10
 
-underlying_prices = np.linspace(min_price, max_price, 10)
+underlying_prices = np.linspace(min_price, max_price, 8)
 
 def calculate_long_call_payoff(underlying_price, strike_price, premium):
     payoffs = np.where(underlying_prices <= strike_price, -premium, (underlying_prices - strike_price) - premium)
