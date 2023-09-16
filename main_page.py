@@ -30,17 +30,25 @@ If the Lebrons cost 190 dollars right now, do you really want to use the coupon?
 
 But let’s say LeBron wins the finals with the Lakers next week (hypothetically). Suddenly, the LeBrons are flying off the shelves, and Nike jacks up the prices to 300 dollars a pair!
 
-How are we feeling? Pretty good I’d imagine! We can buy LeBrons for 100 dollars off the retail price. 
+How are we feeling? Pretty good I’d imagine! We can buy LeBrons for 100 dollars off the retail price.
 
-If we know the coupon is expiring today, we can pretty easily plot out its value as a function of Nike's retail price
+Since we expect there's a lot of people willing to buy the shoe, we might even buy the 2 pairs of shoes for 200 dollars, and sell them to someone else for 300 dollars each. 
+This means we'd make 200 dollars! 
+Can you see why? 
 
-We'll assume we got the coupon for 10 dollars, just as an example""")
+(300-200)x2 = (100)x2 = 200 
+
+So if we know the coupon is expiring today, we can pretty easily plot out the profit we might get from using it as a function of Nike's retail price.
+
+(Nike Price - Coupon Price) x 2 shoes per coupon.
+
+We'll assume we got the coupon for free, for now""")
 
 min_price = 50
 max_price = 500
 
 strike_price = 200
-premium = 10
+premium = 0
 
 underlying_prices = np.linspace(min_price, max_price, 9)
 
@@ -54,9 +62,9 @@ payoffs = calculate_long_call_payoff(underlying_prices, strike_price, premium)
 # Create a Plotly figure
 fig = px.line(x=underlying_prices, y=payoffs, labels={"x": "Underlying Asset Price", "y": "Payoff"})
 fig.update_layout(
-    title=f"{strategy_type} Payoff Diagram",
-    xaxis_title="Underlying Asset Price",
-    yaxis_title="Payoff"
+    title=f"Coupon Profit Diagram",
+    xaxis_title="LeBron Shoe Value",
+    yaxis_title="Profit"
 )
 
 # Display the Plotly figure in Streamlit
