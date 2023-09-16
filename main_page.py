@@ -158,8 +158,8 @@ premium_bag = 200
 underlying_prices_bag = np.linspace(min_price_bag, max_price_bag, max_price_bag-min_price_bag)
 
 def calculate_long_put_payoff(underlying_prices, strike_price, premium):
-    payoffs = np.where(underlying_prices >= strike_price, (underlying_prices - strike_price) - premium, -premium)
-    return payoffs
+    put_payoffs = np.where(underlying_prices <= strike_price, (strike_price - underlying_prices) - premium, -premium)
+    return put_payoffs
 
 payoffs_bag = calculate_long_put_payoff(underlying_prices_bag, strike_price_bag, premium_bag)
 
