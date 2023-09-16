@@ -329,7 +329,6 @@ for i in range(len(probabilities)):
 
 st.latex(latex_string_dice)
 
-for i in range(6-strike):
     
 
 st.write("""
