@@ -370,7 +370,10 @@ Here, we
 
 ### What does this have to do with stocks?
 
-Just like how we came up with a distribution of values of the die at the end of the die roll, we can come up with a distribution of prices of a stock on the day of an option's expiration!
+It's the exact same process!
+
+1. Come up with a distribution of the possible prices of the asset on the day of the expiry.
+2. Estimate or simulate the probability that each price happens
 
 We'll skip over some of the technical detail on how exactly we're going to simulate a stock price series, but you can look up Wiener Process to find out more
 
@@ -393,7 +396,7 @@ def simulate_gbm_paths(s0, mu, sigma, n=24, T=30, num_paths=1000, plot=True):
         fig_paths.add_trace(go.Scatter(x=t, y=S[i,:], mode='lines', name=f'Path {i+1}'))
 
     fig_paths.update_layout(
-        title='Simulated Geometric Brownian Motion Paths',
+        title='Simulated Stock Prices Over Time',
         xaxis_title='Time',
         yaxis_title='Price',
         showlegend=True,
@@ -406,9 +409,60 @@ def simulate_gbm_paths(s0, mu, sigma, n=24, T=30, num_paths=1000, plot=True):
 
 simulate_gbm_paths(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=10, plot=True)
 
+import numpy as np
+import plotly.graph_objs as go
+
+def simulate_gbm_paths_plotly_with_histogram(s0, mu, sigma, n=24, T=30, num_paths=1000):
+    dt = 1/n
+    t = np.linspace(0, T, n*T+1)
+    S = np.zeros((num_paths, n*T+1))
+    
+    for i in range(num_paths):
+        W = np.random.standard_normal(size=n*T+1)
+        W = np.cumsum(W)*np.sqrt(dt)
+        X = (mu-0.5*sigma**2)*t + sigma*W
+        S[i,:] = s0*np.exp(X)
+        
+    fig = go.Figure()
+    for i in range(num_paths):
+        fig.add_trace(go.Scatter(x=t, y=S[i,:], mode='lines', name=f'Path {i+1}'))
+    
+    end_values = S[:, -1]
+    fig.add_trace(go.Histogram(x=end_values, name='End Values', xaxis='x2'))
+    
+    fig.update_layout(
+        title='Simulated Geometric Brownian Motion Paths with End Value Histogram',
+        xaxis_title='Time',
+        yaxis_title='Price',
+        xaxis2=dict(
+            domain=[0.8, 1.0],  # Adjust the position of the histogram
+            anchor='y1',
+        ),
+        yaxis2=dict(
+            anchor='x2',
+        ),
+        showlegend=True,
+        width=1000,
+        height=500,
+    )
+    
+    st.plotly_chart(fig.show())
+
+simulate_gbm_paths_plotly_with_histogram()
+
+# Example usage:
+# simulate_gbm_paths_plotly_with_histogram(s0=100, mu=0.05, sigma=0.2, n=24, T=30, num_paths=5)
 
 
 st.write("""
+
+3. Figure out how much the option is worth for each price
+
+
+4. Find the average value of the option based on the probability distribution of prices
+
+
+
 
 do the thing where we plot a spaghetti chart of possible stock price series
 
