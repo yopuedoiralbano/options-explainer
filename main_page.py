@@ -523,7 +523,7 @@ simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=200, mu=0.0005, sigma
 
 
 
-4. Find the average value of the option based on the probability distribution of prices
+st.write("""4. Find the average value of the option based on the probability distribution of prices
 
 
 
