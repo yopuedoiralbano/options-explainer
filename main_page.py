@@ -304,9 +304,14 @@ fig_dice_payoff.update_layout(
 st.plotly_chart(fig_dice_payoff)
 
 probabilities = hist_payoffs / np.sum(hist_payoffs)
-st.write(probabilities)
-st.write(bin_edges_payoffs[:-1])
 expected_value = np.sum(probabilities * bin_edges_payoffs[:-1])
+
+latex_string_dice = ""
+
+for i in probabilities:
+    latex_string_dice += f"{probabilities[i]} \\times {bin_edges_payoffs[i] + }"
+    
+st.latex(latex_string_dice)
 st.write(expected_value)
 
 
