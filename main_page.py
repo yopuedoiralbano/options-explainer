@@ -518,12 +518,29 @@ def simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0, mu, sigma, n=24,
     
     st.plotly_chart(fig)
 
-
-simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=1000, strike_threshold=210)
-
+return end_values
 
 
-st.write("""4. Find the average value of the option based on the probability distribution of prices
+end_prices = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=1000, strike_threshold=210)
+
+st.write("""
+
+4. Find the average value of the option based on the probability distribution of prices
+
+Let's not look at the calculation exactly here, since it would be a bit long, but the price would be: """)
+
+
+def call_option_asset(asset, end_values):
+    payoffs = end_values - strike_price
+    payoffs = np.clip(payoffs, 0, None)
+    return payoffs.mean()
+
+theo = call_option_asset(end_prices)
+
+
+st.latex(theo)
+
+st.write(""" 
 
 
 
