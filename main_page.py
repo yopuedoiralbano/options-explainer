@@ -87,8 +87,7 @@ TODO: make these exploration questions better lol
 
 - what happens when the coupon price is above the maximum price range?
 - what happens when the coupon price is below the minimum price range?
-- can you make the price for the coupon just high enough that your maximum profit is 0?
-- can you make the price for the coupon just low enough that your minimum profit is 0?
+- what's the relation between the price paid for the coupon, coupon price, and the min/max price range?
 """)
 
 min_max_price_input = st.slider(
@@ -103,8 +102,6 @@ premium_input = st.slider(
     'Select the price we paid for the coupon!',
     0, 1000, 10)
 
-
-
 underlying_prices_shoes = np.linspace(min_max_price_input[0], min_max_price_input[1], (min_max_price_input[1]-min_max_price_input[0]))
 
 payoffs_shoes = calculate_long_call_payoff(underlying_prices_shoes, strike_price_input, premium_input)
@@ -118,5 +115,61 @@ fig2.update_layout(
 
 st.plotly_chart(fig2)
 
+st.write("""
+Now that we've done some exploration, let's talk about another variant of an option. 
+
+Imagine instead of being able to buy an object for a specified price before some specified expiration date, we can sell an object instead. 
+
+For example, imagine you have a designer handbag that a coworker of yours has always wanted. 
+
+She's saving up for her own bag, but she's willing to buy your bag off of you anytime within the next year, for 1500 dollars. 
+She'll guarantee to do this trade with you, if you pay her 100 dollars up front. 
+
+The handbag is worth 2000 dollars right now, so you have no reason to sell it to her for 1500 dollars. 
+But like before with the LeBron shoes - something might happen that could cause your handbag's value to drop dramatically. 
+
+Let's say you agree to her deal. 
+
+A few months later, handbags are falling out of fashion. In a shocking twist, backpacks have become all the rage, and the one-sided handbags are seen as trashy. 
+Your handbag is only worth 200 dollars now! (it is still very high quality)
+
+You call your coworker and give her the handbag. She's a bit upset, but upholds her end of the bargain. 
+
+How much money did you just make, in theory? 
+You sold something that was worth 200 dollars for 1500 dollars, and you only paid 100 dollars to be able to do that, so you've made 1200 dollars!
+""")
+
+st.latex('''(1500-200) \\times 1 - 100 = 1300 \\times 1 - 100 = 1300 - 100 = 1200''')
+
+st.write("""
+Generalizing this formula:
+""")
+
+st.latex('''(\\text{Coworker Price} - \\text{Handbag Price}) \\times (n \\text{ handbags per deal}) - (\\text{deal price})''')
+
+st.write(""" Just like before, we can plot the theoretical profit we'd have had one year out, depending on how much our handbag ended up being worth.""")
+
+min_price_bag = 100
+max_price_bag = 2000
+
+strike_price_bag = 1500
+premium_bag = 200
+
+underlying_prices_bag = np.linspace(min_price_bag, max_price_bag, 1)
+
+def calculate_long_put_payoff(underlying_prices, strike_price, premium):
+    payoffs = np.where(underlying_prices <= strike_price, (strike_price - underlying_prices) - premium, -premium)
+    return payoffs
+
+payoffs_bag = calculate_long_call_payoff(underlying_prices_bag, strike_price_bag, premium_bag)
+
+fig_bag = px.line(x=underlying_prices_bag, y=payoffs_bag, labels={"x": "Designer Handbag Value", "y": "Profit"})
+fig_bag.update_layout(
+    title=f"Coworker Deal Profit Diagram",
+    xaxis_title="Designer Handbag Value",
+    yaxis_title="Profit"
+)
+
+st.plotly_chart(fig_bag)
 
 
