@@ -310,13 +310,12 @@ latex_string_dice = ""
 
 for i in range(len(probabilities)):
     if i == len(probabilities)-1:
-        latex_string_dice += f"{probabilities[i]} \\times {bin_edges_payoffs[i]} "
+        latex_string_dice += f"{probabilities[i]} \\times {bin_edges_payoffs[i]} = {expected_value}"
     else:
         latex_string_dice += f"{probabilities[i]} \\times {bin_edges_payoffs[i]} + "
         
     
 st.latex(latex_string_dice)
-st.write(expected_value)
 
 
 
