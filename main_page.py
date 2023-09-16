@@ -15,6 +15,7 @@ Options let us express views on how wiggly a stock is
 Options are kind of like coupons. 
 
 Let’s say Nike is selling coupons for a pair of basketball shoes, at **10 dollars per coupon**. 
+
 Each coupon will let you buy **2 pairs of LeBron shoes** for **200 dollars each**. 
 The coupons **expire in 1 month**, so you have some time to decide to use the coupon. 
 
@@ -46,7 +47,7 @@ st.write("""
 Generalizing this formula:
 """)
 
-st.latex('''(\\text{Nike Price} - \\text{Coupon Price}) \\times (n \\text{ shoes per coupon}) - (\\text{coupon price})''')
+st.latex('''(\\text{Nike Price} - \\text{Coupon Price}) \\times (n \\text{ pairs of shoes per coupon}) - (\\text{coupon price})''')
 
 
 st.write("""
