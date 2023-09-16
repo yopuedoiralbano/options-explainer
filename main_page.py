@@ -339,7 +339,7 @@ So for each outcome $i$
 """)
 
 st.latex('''
-\\sum_i^n \\text{probability of outcome i} \\times \\text{payoff of outcome i}''')
+\\text{average value} = \\sum_i^n \\text{probability of outcome i} \\times \\text{payoff of outcome i}''')
 
 st.latex(latex_string_dice)
 
