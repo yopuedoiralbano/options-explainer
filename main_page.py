@@ -36,15 +36,23 @@ Since we expect there's a lot of people willing to buy the shoe, we might even b
 This means we'd make 200 dollars! 
 Can you see why? 
 
-\[
-(300 - 200) \times 2 = 100 \times 2 = 200
-\]
+""")
 
+st.latex((300-200) \times 2 = 100 \times 2 = 200)
+
+st.write("""
+Generalizing this formula:
+""")
+
+st.latex((\text{Nike Price} - \text{Coupon Price}) \times 2 \text{shoes per coupon})
+
+
+st.write("""
 So if we know the coupon is expiring today, we can pretty easily plot out the profit we might get from using it as a function of Nike's retail price.
 
-(Nike Price - Coupon Price) x 2 shoes per coupon.
+We'll assume we got the coupon for free, for now
+""")
 
-We'll assume we got the coupon for free, for now""")
 
 min_price = 50
 max_price = 500
