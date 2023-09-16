@@ -454,7 +454,7 @@ def simulate_gbm_paths_plotly_histogram_with_bins(s0, mu, sigma, n=24, T=30, num
     
     st.plotly_chart(fig)
 
-simulate_gbm_paths_plotly_with_histogram(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=1000)
+simulate_gbm_paths_plotly_histogram_with_bins(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=1000)
 
 # Example usage:
 # simulate_gbm_paths_plotly_with_histogram(s0=100, mu=0.05, sigma=0.2, n=24, T=30, num_paths=5)
