@@ -161,7 +161,7 @@ def calculate_long_put_payoff(underlying_prices, strike_price, premium):
     payoffs = np.where(underlying_prices >= strike_price, (underlying_prices - strike_price) - premium, -premium)
     return payoffs
 
-payoffs_bag = calculate_long_call_payoff(underlying_prices_bag, strike_price_bag, premium_bag)
+payoffs_bag = calculate_long_put_payoff(underlying_prices_bag, strike_price_bag, premium_bag)
 
 fig_bag = px.line(x=underlying_prices_bag, y=payoffs_bag, labels={"x": "Designer Handbag Value", "y": "Profit"})
 fig_bag.update_layout(
