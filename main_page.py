@@ -14,10 +14,12 @@ Options let us express views on how wiggly a stock is
 
 Options are kind of like coupons. 
 
-Let’s say Nike is selling coupons for a pair of basketball shoes. They’re selling coupons that will let you buy 2 pairs of LeBron shoes for 200 dollars. The coupons expire in 1 month, so you have some time to decide to use the coupon. 
+Let’s say Nike is selling coupons for a pair of basketball shoes, at 10 dollars per coupon. 
+They’re selling coupons that will let you buy 2 pairs of LeBron shoes for 200 dollars. 
+The coupons expire in 1 month, so you have some time to decide to use the coupon. 
 
 These coupons have:
-
+- **a price** (you have to pay money for the coupon)
 - **a way to transact** (you get to buy something for a specified price)
 - **an underlying asset** (you get to buy LeBrons)
 - **an expiry date** (you get to buy LeBrons until 1 month from now)
@@ -33,24 +35,22 @@ But let’s say LeBron wins the finals with the Lakers next week (hypothetically
 How are we feeling? Pretty good I’d imagine! We can buy LeBrons for 100 dollars off the retail price.
 
 Since we expect there's a lot of people willing to buy the shoe, we might even buy the 2 pairs of shoes for 200 dollars, and sell them to someone else for 300 dollars each. 
-This means we'd make 200 dollars! 
+This means we'd make 190 dollars! 
 Can you see why? 
 
 """)
 
-st.latex('''(300-200) \\times 2 = 100 \\times 2 = 200''')
+st.latex('''(300-200) \\times 2 - 10 = 100 \\times 2 - 10 = 200 - 10 = 190''')
 
 st.write("""
 Generalizing this formula:
 """)
 
-st.latex('''(\\text{Nike Price} - \\text{Coupon Price}) \\times 2 \\text{shoes per coupon}''')
+st.latex('''(\\text{Nike Price} - \\text{Coupon Price}) \\times 2 \\text{ shoes per coupon} - \\text{coupon price}''')
 
 
 st.write("""
-So if we know the coupon is expiring today, we can pretty easily plot out the profit we might get from using it as a function of Nike's retail price.
-
-We'll assume we got the coupon for free, for now
+So if we know the coupon is expiring today, we can pretty easily plot out the profit we might get from buying and using it as a function of Nike's retail price.
 """)
 
 
@@ -58,7 +58,7 @@ min_price = 50
 max_price = 500
 
 strike_price = 200
-premium = 0
+premium = 10
 
 underlying_prices = np.linspace(min_price, max_price, 10)
 
@@ -66,10 +66,8 @@ def calculate_long_call_payoff(underlying_price, strike_price, premium):
     payoffs = np.where(underlying_prices <= strike_price, -premium, (underlying_prices - strike_price) - premium)
     return payoffs
 
-# Calculate the option strategy payoffs for each price point
 payoffs = calculate_long_call_payoff(underlying_prices, strike_price, premium)
 
-# Create a Plotly figure
 fig = px.line(x=underlying_prices, y=payoffs, labels={"x": "LeBron Shoe Value", "y": "Profit"})
 fig.update_layout(
     title=f"Coupon Profit Diagram",
@@ -77,7 +75,11 @@ fig.update_layout(
     yaxis_title="Profit"
 )
 
-# Display the Plotly figure in Streamlit
 st.plotly_chart(fig)
+
+
+st.write("""
+This is pretty cool! Looks like we have a ton of upside, and not very much downside. 
+""")
 
 
