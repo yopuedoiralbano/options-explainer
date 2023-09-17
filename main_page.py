@@ -722,6 +722,20 @@ So if your option has 0.5 delta, and moves 50 cents for every dollar movement in
 
 This means, in order to purely trade volatility, we can 'delta hedge' our risk due to the underlying stock's movement by buying shares (or selling them) 
 
+
+### Resources to learn more + Works Cited:
+
+https://www.investopedia.com/terms/o/option.asp
+
+https://en.wikipedia.org/wiki/Geometric_Brownian_motion
+
+https://moontowerquant.com/options-starter-pack
+
+https://moontowermeta.com/introducing-the-moontower-volatility-wiki/
+
+https://x.com/therobotjames/status/1444832714922758148?s=20
+
+
 MAYBE: 
 put call parity
 
