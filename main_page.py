@@ -221,7 +221,7 @@ Before we move on, let's quickly go over some terminology, so that everyone is o
 
 - The price that we pay for an option is its **PREMIUM**
 
-- The amount of the asset that we trade in an option is its **MULTIPLIER**
+- The amount of the asset that we trade in an option is its **MULTIPLIER** (stock options are usually 100)
 
 - The expiration date is the ... **EXPIRATION DATE** (no fancy name here)
 
@@ -670,16 +670,56 @@ If we know an option's volatility, we can work out what the price of the option 
 
 Vice versa, if we know the price of an option, we can work out the 'implied volatility' of an option. 
 
-This is why options are so intertwined with our beliefs about the volatility of a stock.
+### Why and how do we trade volatility?
 
-If we think a stock should be more volatile than the 'implied volatility' that the option tells us, we should buy the option!
+Unlike in the model shown above, volatility is not constant over time. 
 
-This is because if the volatility that ends up occurring is higher than what the market predicted, the option is more valuable on average, so we make money!
+One obvious example of stock volatility changing is news announcements. Apple's share price is likely to be more volatile when a new iPhone releases, than when nothing big and interesting is happening with the company. 
 
-Likewise, if we think that the market's 'implied volatility' of an option is lower than what we think, we should sell the option!
+While the market has an implied volatility that we can infer from the option's price, what actually happens might be different. 
 
-Now, if the volatility that ends up occurring is lower than what the market predicted, the option will be less valuable on average, so we make money!
+We call the volatility that actually happens 'realized volatility'. 
 
+- If we think a stock's 'realized volatility' will be higher than the market's 'implied volatility' derived from the option price, we should buy the option
+  - This is because if the volatility that ends up occurring is higher than what the market predicted, the option is more valuable on average, so we make money!
+  - Circling back to our coupon example, this means that we should buy coupons from Nike only if we think they're understimating how much their shoes might fluctuate in value. 
+  - We should only agree to the deal with our coworker if we think she's underestimating how much the handbag might fluctuate in value. 
+
+- Likewise, if we think a stock's 'realized volatility' will be lower than market's 'implied volatility' derived from the option price, we should sell the option
+  - Now, if the volatility that ends up occurring is lower than what the market predicted, the option will be less valuable on average, so we make money!
+  - Nike probably sold the coupons because they thought that we'd overestimate the volatility of the shoe price
+  - Our coworker probably made the deal with us because she thought we'd overestimate the volatility of the handbag
+
+This is why options are so intertwined with our beliefs about the volatility of a stock: their price is a direct expression of what the market expects a stock's volatility to be. 
+
+If you liked this explainer, please send feedback to: TODO
+
+
+Some Quick Notes/FAQ that didn't get its own section: 
+
+### How do I sell an option I don't have? 
+
+Remember how Nike gave us coupons, and our coworker offered us a deal? 
+
+Just like how you can buy these contracts, you can write one up for someone else to buy!
+
+There are times where you might want to be the one writing the contract, usually when you think that someone else is overestimating future 'realized volatility' versus your expectation
+
+### What if I'm right about volatility, but wrong about the price movement? 
+
+This is a bit out of scope but if you think about it, you would want to offset the risk of the stock moving somehow. 
+
+If you're long a put option, then your option doesn't just make money when realized volatility is higher than implied, you also make money when the stock goes down. But this means you'll also lose money if the stock goes up. 
+
+To offset this risk that comes from the direction of the stock movement, you'll likely want to buy enough shares to offset the price change of your option.
+
+The effect 'Delta' that we explored earlier, the option's sensitivity to price change in the underlying stock, is the effect we want to cancel out. 
+
+If an option has 0.5 delta, then it moves 50 cents for each dollar movement in the underlying stock.
+
+So if your option has 0.5 delta, and moves 50 cents for every dollar movement in the underlying stock, you probably want to buy 50 shares of the stock. (this is because a stock option multiplier is 100 shares, 100 x 0.5 = 50)
+
+This means, in order to purely trade volatility, we can 'delta hedge' our risk due to the underlying stock's movement by buying shares (or selling them) 
 
 MAYBE: 
 put call parity
