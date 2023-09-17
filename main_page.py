@@ -207,11 +207,15 @@ Like with the Nike Coupons, Call Options allow you to buy a fixed amount of some
 
 And like with the Coworker Handbag Deal, Put Options allow you to sell a fixed amount of some asset (for example, stocks), at a specified price until an expiration date.
 
-They're called 'options' because you don't have to do them! If the LeBrons had never increased in price, all we lose is the amount we paid for the option, same situation for the handbag. 
+They're called 'options' because you don't have to exercise them! 
+
+If the LeBrons had never increased in price, we wouldn't want or need to use them, so all we'd lose is the amount we paid for the coupon.
+
+Same situation for the handbag, we didn't exercise the option to sell it to our coworker because it wouldn't be profitable for us.
+
+Before we move on, let's quickly go over some terminology, so that everyone is on the same page. 
 
 ### Terminology
-
-Let's quickly go over some terminology, so that everyone is on the same page. 
 
 - The specified price that we transact at in an option is its **STRIKE PRICE**
 
@@ -377,8 +381,21 @@ It's the exact same process!
 1. Come up with a distribution of the possible prices of the asset on the day of the expiry.
 2. Estimate or simulate the probability that each price happens
 
-We'll skip over some of the technical detail on how exactly we're going to simulate a stock price series, but you can look up Wiener Process to find out more
+Here's how we're going to simulate a stock's potential future paths:
 
+- start with the current price of the stock
+- for each time step:
+  - we choose an amount for the stock to move (the stock's return at the current timestep)
+  - we choose the amount for the stock to move from a symmetrical bell curve of possible amounts (sampling fro a normal distribution)
+  - the width of the bell curve is the stock's 'volatility' (this is the standard deviation of the return distribution)
+  - a higher volatility means a wider bell curve, so the movements will usually be further from the average (higher volatility -> the stock path will jump around more)
+  - a lower volatility means a tighter bell curve, so the movements will usually be closer to the average (lower volatility -> the stock path will be more smooth)
+  - simulate the stock moving that amount
+  - set the new current price to be the price after the stock moved
+  
+
+
+There's some technical detail being glossed over in the above explanation, but feel free to look up geometric brownian motion if you want to learn more about the specifics!
 """)
 
 def simulate_gbm_paths(s0, mu, sigma, n=24, T=30, num_paths=1000, plot=True):
