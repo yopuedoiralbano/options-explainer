@@ -453,7 +453,7 @@ def simulate_gbm_paths_plotly_histogram_with_bins(s0, mu, sigma, n=24, T=30, num
     hist_values, bin_edges = np.histogram(end_values, bins=num_bins)
     
     # Create subplots with one row and two columns
-    fig = make_subplots(rows=1, cols=2, subplot_titles=('GBM Paths', 'End Value Histogram'), column_widths=[0.7, 0.3])
+    fig = make_subplots(rows=1, cols=2, subplot_titles=('Stock Paths', 'End Value Histogram'), column_widths=[0.7, 0.3])
     
     # Add GBM paths to the first subplot
     for i in range(num_paths):
@@ -511,7 +511,7 @@ def simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0, mu, sigma, n=24,
     hist_values, bin_edges = np.histogram(end_values, bins=num_bins)
     
     # Create subplots with one row and two columns
-    fig = make_subplots(rows=1, cols=2, subplot_titles=('GBM Paths', 'End Value Histogram'), column_widths=[0.7, 0.3])
+    fig = make_subplots(rows=1, cols=2, subplot_titles=('Stock Paths', 'End Value Histogram'), column_widths=[0.7, 0.3])
     
     # Add GBM paths to the first subplot
     for i in range(num_paths):
@@ -551,6 +551,7 @@ def call_option_asset(end_values, strike_value):
     payoffs = end_values - strike_value
     payoffs = np.clip(payoffs, 0, None)
 
+    st.write("""Theoretical Option Price From Simulation: """
     st.latex(payoffs.mean())
     return payoffs.mean()
 
