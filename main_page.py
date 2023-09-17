@@ -415,7 +415,7 @@ def simulate_gbm_paths(s0, mu, sigma, n=24, T=30, num_paths=1000, plot=True):
         fig_paths.add_trace(go.Scatter(x=t, y=S[i,:], mode='lines', name=f'Path {i+1}'))
 
     fig_paths.update_layout(
-        title='Simulated Stock Prices Over Time',
+        title='Simulated Stock Paths',
         xaxis_title='Time',
         yaxis_title='Price',
         showlegend=True,
@@ -465,7 +465,7 @@ def simulate_gbm_paths_plotly_histogram_with_bins(s0, mu, sigma, n=24, T=30, num
     
     # Update layout
     fig.update_layout(
-        title='Simulated Geometric Brownian Motion Paths with Histogram and Bins',
+        title='Simulated Stock Paths and Expiration Price Distribution',
         xaxis_title='Counts',
         yaxis_title='Price',
         xaxis2=dict(domain=[0.75, 1.0]),
@@ -524,7 +524,7 @@ def simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0, mu, sigma, n=24,
     
     # Update layout
     fig.update_layout(
-        title='Simulated Geometric Brownian Motion Paths with Histogram and Bins',
+        title='Simulated Stock Paths and Colored Expiration Price Distribution',
         xaxis_title='Counts',
         yaxis_title='Price',
         xaxis2=dict(domain=[0.75, 1.0]),
