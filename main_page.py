@@ -692,12 +692,13 @@ We call the volatility that actually happens 'realized volatility'.
 
 This is why options are so intertwined with our beliefs about the volatility of a stock: their price is a direct expression of what the market expects a stock's volatility to be. 
 
-If you liked this explainer, please send feedback to: TODO
+### Other Stuff
 
+This explainer is a work in progress! Please send feedback to: 
 
-Some Quick Notes/FAQ that didn't get its own section: 
+### Some FAQ I didn't cover:
 
-### How do I sell an option I don't have? 
+#### How do I sell an option I don't have? 
 
 Remember how Nike gave us coupons, and our coworker offered us a deal? 
 
@@ -705,7 +706,7 @@ Just like how you can buy these contracts, you can write one up for someone else
 
 There are times where you might want to be the one writing the contract, usually when you think that someone else is overestimating future 'realized volatility' versus your expectation
 
-### What if I'm right about volatility, but wrong about the price movement? 
+#### What if I'm right about volatility, but wrong about the price movement? 
 
 This is a bit out of scope but if you think about it, you would want to offset the risk of the stock moving somehow. 
 
