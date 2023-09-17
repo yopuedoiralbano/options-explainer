@@ -550,8 +550,8 @@ Let's not look at the calculation exactly here, since it would be a bit long, bu
 def call_option_asset(end_values, strike_value):
     payoffs = end_values - strike_value
     payoffs = np.clip(payoffs, 0, None)
-
-    st.latex('''\\text{Simulation-Derived Theoretical Price: }payoffs.mean()''')
+    st.latex("\\text{Simulated Fair Price: }")
+    st.latex(payoffs.mean())
     return payoffs.mean()
 
 call_option_asset(end_prices, strike_value)
