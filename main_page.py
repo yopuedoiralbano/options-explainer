@@ -551,8 +551,7 @@ def call_option_asset(end_values, strike_value):
     payoffs = end_values - strike_value
     payoffs = np.clip(payoffs, 0, None)
 
-    st.write("""Theoretical Option Price From Simulation: """)
-    st.latex(payoffs.mean())
+    st.latex('''\\text{Simulation-Derived Theoretical Price: }payoffs.mean()''')
     return payoffs.mean()
 
 call_option_asset(end_prices, strike_value)
