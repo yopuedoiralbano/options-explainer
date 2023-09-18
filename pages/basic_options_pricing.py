@@ -137,4 +137,4 @@ Here, we
 1. Came up with the distribution of possible prices (1-6 are the possible faces of a die)
 2. Estimated the probability of each possible price by simulating (roughly 1/6 since it's a fair die)
 3. Figured out how much the option is worth for each price (Die Value - Strike Price whenever the Die Value > Strike Price)
-4. Found the average value of the option based on the probability distribution of prices (multiplied each outcome by its probability, weighted average)
+4. Found the average value of the option based on the probability distribution of prices (multiplied each outcome by its probability, weighted average)""")
