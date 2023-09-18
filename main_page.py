@@ -782,8 +782,7 @@ Volatility also isn't constant across price:
 
 The implied volatility given a specific expiration date fluctuates over the different strike prices available. That's volatility skew. 
 
-Why this happens is non-trivial to explain, but you can read more about it here: 
-
+Why this happens is non-trivial to explain, but you can read more about it here: https://www.investopedia.com/articles/stock-analysis/081916/volatility-surface-explained.asp
 
 ### What about Second Order Greeks like Gamma? 
 
@@ -802,10 +801,6 @@ There's more but they don't really matter that much, read more here: https://www
 Out of scope, but its sensitivity of option price to interest rates. 
 
 Read more here: https://www.investopedia.com/terms/r/rho.asp
-
-### What about different expiry dates?
-
-Out of scope, TODO later
 
 ### Resources to learn more + Works Cited:
 
