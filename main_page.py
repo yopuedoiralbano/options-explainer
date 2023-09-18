@@ -97,6 +97,11 @@ This is pretty cool! Looks like we have a ton of upside (potentially infinite), 
 
 Play around with the parameters a bit, try to answer the following questions/do the following:
 
+- where does the 'kink' in the payoff curve come from? 
+- where does the maximum loss in the payoff curve come from?
+- can you make a setup where its impossible to profit? 
+- can you make a setup where its impossible to lose money?
+
 """)
 
 strike_price_input = st.slider(
@@ -255,7 +260,7 @@ Pretend it's worth 1 cent. Seems a bit cheap, right? We could buy it for a cent 
 What if it's worth 2 dollars?
 That seems a bit high, we could sell it to someone at that price a bunch of times and expect to make money almost every time, since it's never going to pay out more than 2 dollars. (Why?) 
 
-So the answer is somewhere in between these bounds. 
+So the answer is somewhere in between these bounds.
 
 We can try to figure out how much the option is worth by simulating the dice roll a bunch of times, and finding the average value of the option over time.
 
@@ -358,6 +363,7 @@ st.write(""" plugging in the values from the histogram above, we find that the s
 st.latex(latex_string_dice)
 
 st.write("""
+
 This is pretty much how options are priced in the real world, on just about any asset!
 
 1. Come up with a distribution of the possible prices of the asset on the day of the expiry.
@@ -365,7 +371,7 @@ This is pretty much how options are priced in the real world, on just about any 
 3. Figure out how much the option is worth for each price
 4. Find the average value of the option based on the probability distribution of prices
 
-Here, we 
+With the dice example, we: 
 1. Came up with the distribution of possible prices (1-6 are the possible faces of a die)
 2. Estimated the probability of each possible price by simulating (roughly 1/6 since it's a fair die)
 3. Figured out how much the option is worth for each price (Die Value - Strike Price whenever the Die Value > Strike Price)
@@ -427,8 +433,6 @@ st.write("""Now that we've simulated some paths, let's look at the distribution 
 
 Let's generate a lot more paths: 100 should be a good number to start with
 """)
-
-
 
 def simulate_gbm_paths_plotly_histogram_with_bins(s0, mu, sigma, n=24, T=30, num_paths=1000, num_bins=20):
     dt = 1/n
@@ -540,7 +544,7 @@ st.write("""
 
 4. Find the average value of the option based on the probability distribution of prices
 
-Let's not look at the calculation exactly here, since it would be a bit long, but the price would be: """)
+Let's not look at the calculation exactly here, since it would be a bit long, but according to the simulation, the price of the option is, on average: """)
 
 def call_option_asset(end_values, strike_value):
     payoffs = end_values - strike_value
@@ -568,6 +572,11 @@ How does the option value usually change as a function of the strike price?
 How does the option value usually change as a function of the time to expiry?
 
 How does the option value usually change as a function of the stock's volatility?
+
+What's the relation between the variables mentioned above, and the end value distributions?
+
+What's the relation between the colors of the end value distribution and the option's price? 
+
 
 """)
 
@@ -690,6 +699,24 @@ We call the volatility that actually happens 'realized volatility'.
 
 This is why options are so intertwined with our beliefs about the future distribution of a stock: their price is a often an expression of what the market expects a stock's volatility to be. 
 
+___
+
+### Thanks for reading!
+
+Hopefully this was a helpful guide on how options help us express beliefs about future price distributions on stocks and other assets!
+
+I'm looking to make this guide better any way that I can, please feel free to send feedback to: decal@traders.berkeley.edu
+
+### FAQ
+
+#### How do I sell an option I don't have? 
+
+Remember how Nike gave us coupons, and our coworker offered us a deal? 
+
+Just like how you can buy these contracts, you can write one up for someone else to buy!
+
+There are times where you might want to be the one writing the contract, usually when you think that someone else is overestimating future 'realized volatility' versus your expectation
+
 ### What about more specific price distributions? 
 
 (warning: slightly out of scope and gets technical quickly)
@@ -723,24 +750,6 @@ There's a lot of ways to express the above opinion, that Twitter will be exactly
 - the exact same as the above, but with puts
 
 Think about why this might be the case!
-
-### Thanks for reading!
-
-Hopefully this was a helpful guide on how options help us express beliefs about future price distributions on stocks and other assets!
-
-I'm looking to make this guide better any way that I can, please feel free to send feedback to: 
-
-___
-
-### FAQ
-
-#### How do I sell an option I don't have? 
-
-Remember how Nike gave us coupons, and our coworker offered us a deal? 
-
-Just like how you can buy these contracts, you can write one up for someone else to buy!
-
-There are times where you might want to be the one writing the contract, usually when you think that someone else is overestimating future 'realized volatility' versus your expectation
 
 #### What if I'm right about my trade on volatility, but wrong about the price movement? 
 
