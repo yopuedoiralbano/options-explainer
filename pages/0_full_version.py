@@ -8,10 +8,9 @@ from plotly.subplots import make_subplots
 # Define the Streamlit app
 st.title("Options Explainer")
 
+st.write("""## Key Ideas of Options
 
-st.write("""## Key Idea of Options
-
-Options let us express beliefs on how wiggly the price of a stock is (also known as its 'volatility')
+Options give us fine grained exposure to different levels of prices, letting us express detailed beliefs about price distributions
 
 ### What's an Option?
 
@@ -237,7 +236,7 @@ Handbag 365DTE 1500p @ 100 dollars
 
 ### How much should options cost?
 
-What does any of this have to do with the key idea of volatility? 
+What does any of this have to do with price distributions?
 
 It mostly comes from how we price these options.
 
@@ -251,7 +250,7 @@ You can assume the die is fair, so there's an equal chance that each face comes 
 
 How much should the 4 dollar strike be worth (or what is its premium)? Let's say that the multiplier is 1 (just one die) and that the expiration is after the dice is rolled, and its price is determined. 
 
-We'll start by randomly guessing and vibing out some basic ideas. 
+We'll start by trying some basic ideas and to get a feel for the situation:
 
 Pretend it's worth 1 cent. Seems a bit cheap, right? We could buy it for a cent a bunch of times, and expect to make more than a cent most of the time - so that's probably too cheap. (Why?)
 
@@ -393,8 +392,6 @@ Here's how we're going to simulate a stock's potential future paths:
   - simulate the stock moving that amount
   - set the new current price to be the price after the stock moved
   
-
-
 There's some technical detail being glossed over in the above explanation, but feel free to look up geometric brownian motion if you want to learn more about the specifics!
 """)
 
@@ -675,6 +672,10 @@ Vice versa, if we know the price of an option, we can work out the 'implied vola
 Unlike in the model shown above, volatility is not constant over time. 
 
 One obvious example of stock volatility changing is news announcements. Apple's share price is likely to be more volatile when a new iPhone releases, than when nothing big and interesting is happening with the company. 
+
+Why might this be the case?
+
+The main reason is an increase in uncertainty around the value of Apple stock. We don’t know how people might react to the new iPhone, there might be product failures upon release, and other factors that could result in larger than average price movements.
 
 While the market has an implied volatility that we can infer from the option's price, what actually happens might be different. 
 
