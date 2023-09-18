@@ -88,7 +88,7 @@ st.plotly_chart(fig)
 
 
 st.write("""
-This is pretty cool! Looks like we have a ton of upside (potentially infinite), and not very much downside (what we paid for the coupon, 10 dollars). 
+This is pretty cool! Looks like we have a ton of upside (potentially infinite), and a capped downside (what we paid for the coupon, 10 dollars). 
 
 Play around with the parameters a bit, try to answer the following questions/do the following:
 
