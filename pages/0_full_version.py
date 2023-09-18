@@ -491,7 +491,7 @@ Awesome! We've got a nice distribution that shows the different outcomes of our 
 
 Let's do it again, and clearly mark the 'profitable' and 'unprofitable' zones: or where the price goes above the strike price.
 
-For now, we'll set the strike price to be 210.""")
+For now, we'll set the strike price to be 205.""")
 
 def simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0, mu, sigma, n=24, T=30, num_paths=1000, num_bins=20, strike_threshold=200):
     dt = 1/n
@@ -539,7 +539,7 @@ def simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0, mu, sigma, n=24,
     return end_values, strike_threshold
 
 
-end_prices, strike_value = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=200, mu=0.0, sigma=0.005, n=24, T=30, num_paths=100, strike_threshold=210)
+end_prices, strike_value = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=200, mu=0.0, sigma=0.005, n=24, T=30, num_paths=100, strike_threshold=205)
 
 st.write("""
 
