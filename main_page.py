@@ -707,7 +707,7 @@ Hopefully this was a helpful guide on how options help us express beliefs about 
 
 I'm looking to make this guide better any way that I can, please feel free to send feedback to: decal@traders.berkeley.edu
 
-### FAQ
+### Other Ideas/Questions That Didn't Fit
 
 #### How do I sell an option I don't have? 
 
