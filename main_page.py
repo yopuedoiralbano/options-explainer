@@ -4,14 +4,18 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-
 # Define the Streamlit app
 st.title("Options Explainer")
 
+st.write("""## Key Ideas of Options
 
-st.write("""## Key Idea of Options
+Options give us fine grained exposure to different levels of prices, letting us express detailed beliefs about future price distributions.
 
-Options let us express beliefs on how wiggly the price of a stock is (also known as its 'volatility')
+Rather than just buying or selling and betting on the direction of a stock, we can bet on a whole bunch of other ideas:
+- a stock going up or down (profiting when a stock moves a lot - regardless of direction)
+- a stock staying within a specific price range within some timeframe (profiting when a stock doesn't move very much - regardless of direction)
+- a stock being above or below a specific price within some timeframe 
+- and a whole lot more!
 
 ### What's an Option?
 
@@ -89,28 +93,21 @@ st.plotly_chart(fig)
 
 
 st.write("""
-This is pretty cool! Looks like we have a ton of upside (potentially infinite), and not very much downside (what we paid for the coupon, 10 dollars). 
+This is pretty cool! Looks like we have a ton of upside (potentially infinite), and a capped downside (what we paid for the coupon, 10 dollars). 
 
 Play around with the parameters a bit, try to answer the following questions/do the following:
 
-TODO: make simulations load faster, whole page reloads whenever you change a parameter so i would like to isolate that somehow
-
-TODO: make these exploration questions better lol
-
-- what happens when the coupon price is above the maximum of the price range?
-- what happens when the coupon price is below the minimum of the price range?
-- what's the relation between the price paid for the coupon, coupon price, and the min/max price range?
 """)
 
 strike_price_input = st.slider(
     'Select the discounted price to buy shoes at!',
-    0, 1000, 200)
+    0, 500, 200)
 
 premium_input = st.slider(
     'Select the price we paid for the coupon!',
-    0, 1000, 10)
+    0, 500, 10)
 
-underlying_prices_shoes = np.linspace(0, 1000, (1000))
+underlying_prices_shoes = np.linspace(0, 500, (500))
 
 payoffs_shoes = calculate_long_call_payoff(underlying_prices_shoes, strike_price_input, premium_input)
 
@@ -237,7 +234,7 @@ Handbag 365DTE 1500p @ 100 dollars
 
 ### How much should options cost?
 
-What does any of this have to do with the key idea of volatility? 
+What does any of this have to do with betting on price distributions?
 
 It mostly comes from how we price these options.
 
@@ -251,7 +248,7 @@ You can assume the die is fair, so there's an equal chance that each face comes 
 
 How much should the 4 dollar strike be worth (or what is its premium)? Let's say that the multiplier is 1 (just one die) and that the expiration is after the dice is rolled, and its price is determined. 
 
-We'll start by randomly guessing and vibing out some basic ideas. 
+We'll start by trying some basic ideas and to get a feel for the situation:
 
 Pretend it's worth 1 cent. Seems a bit cheap, right? We could buy it for a cent a bunch of times, and expect to make more than a cent most of the time - so that's probably too cheap. (Why?)
 
@@ -393,8 +390,6 @@ Here's how we're going to simulate a stock's potential future paths:
   - simulate the stock moving that amount
   - set the new current price to be the price after the stock moved
   
-
-
 There's some technical detail being glossed over in the above explanation, but feel free to look up geometric brownian motion if you want to learn more about the specifics!
 """)
 
@@ -477,7 +472,7 @@ def simulate_gbm_paths_plotly_histogram_with_bins(s0, mu, sigma, n=24, T=30, num
     
     st.plotly_chart(fig)
 
-simulate_gbm_paths_plotly_histogram_with_bins(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=100)
+simulate_gbm_paths_plotly_histogram_with_bins(s0=200, mu=0.0, sigma=0.005, n=24, T=30, num_paths=100)
 
 # Example usage:
 # simulate_gbm_paths_plotly_with_histogram(s0=100, mu=0.05, sigma=0.2, n=24, T=30, num_paths=5)
@@ -491,7 +486,7 @@ Awesome! We've got a nice distribution that shows the different outcomes of our 
 
 Let's do it again, and clearly mark the 'profitable' and 'unprofitable' zones: or where the price goes above the strike price.
 
-For now, we'll set the strike price to be 210.""")
+For now, we'll set the strike price to be 205.""")
 
 def simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0, mu, sigma, n=24, T=30, num_paths=1000, num_bins=20, strike_threshold=200):
     dt = 1/n
@@ -539,7 +534,7 @@ def simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0, mu, sigma, n=24,
     return end_values, strike_threshold
 
 
-end_prices, strike_value = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=100, strike_threshold=210)
+end_prices, strike_value = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=200, mu=0.0, sigma=0.005, n=24, T=30, num_paths=100, strike_threshold=205)
 
 st.write("""
 
@@ -607,7 +602,7 @@ sigma_input = st.slider(
     0, 25, 5)
 
 end_prices_interactive, strike_val_input = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=s0_input, 
-                                                                                                   mu=0.0005, sigma=sigma_input/1e3, 
+                                                                                                   mu=0.0, sigma=sigma_input/1e3, 
                                                                                                    n=24, T=time_to_expiry_input, 
                                                                                                    num_paths=200, 
                                                                                                    strike_threshold=strike_val_input)
@@ -630,15 +625,16 @@ Well, you should've noticed the following
 
 4. Option Price Depends on the Volatility of a Stock
 
-Intuitively, all of these should make sense!
+Intuitively, all of these should make sense: 
 
-TODO: make these sentences better
+- A better discount (or lower relative price to buy an asset at) should mean that a coupon is worth more than another coupon
+  - the coupon is now profitable at a lower relative value on the possible price distribution, making its probability of profit higher!
 
-A better discount (or lower relative price to buy an asset at) should mean that a coupon is worth more than another coupon, because it's profitability threshold lower down on the range of prices possible, so the probability of it ending up profitable is higher!
+- A coupon that expires later than another one should be more valuable than one that expires later
+  - price has more time to move around, making its probability of profit higher!
 
-A coupon that expires later than another one should be more valuable than one that expires later, since price has more time to move around, causing the probability of it ending up profitable to be higher!
-
-A coupon that is for an asset that has a very jumpy price should be more valuable, because the range of prices it can reach is wider, so the probability of it ending up profitable is higher!
+- A coupon that is for an asset that has a very jumpy price should be more valuable
+  - the range of prices it can reach is wider, making its probability of profit higher!
 
 These values are known as **Option Greeks**
 
@@ -656,25 +652,27 @@ Theta, Delta, and Vega:
 
 **Vega** is the option's sensitivity to volatility: as a stock gets more volatile, the width of its distribution increases, so the probability of ending above the strike is higher
 
-### Option Prices as a function of Volatility
+### Option Prices and Trading Volatility
 
 Notice how, at any given time, we will always know:
 - the option's strike price
 - the option's days to expiry
 - the stock's current price
 
-But what we don't know is:
+But one thing we don't know is:
 - the stock's volatility
 
 If we know an option's volatility, we can work out what the price of the option should be. 
 
 Vice versa, if we know the price of an option, we can work out the 'implied volatility' of an option. 
 
-### Why and how do we trade volatility?
-
 Unlike in the model shown above, volatility is not constant over time. 
 
 One obvious example of stock volatility changing is news announcements. Apple's share price is likely to be more volatile when a new iPhone releases, than when nothing big and interesting is happening with the company. 
+
+Why might this be the case?
+
+The main reason is an increase in uncertainty around the value of Apple stock. We don’t know how people might react to the new iPhone, there might be product failures upon release, and other factors that could result in larger than average price movements.
 
 While the market has an implied volatility that we can infer from the option's price, what actually happens might be different. 
 
@@ -690,8 +688,11 @@ We call the volatility that actually happens 'realized volatility'.
   - Nike probably sold the coupons because they thought that we'd overestimate the volatility of the shoe price
   - Our coworker probably made the deal with us because she thought we'd overestimate the volatility of the handbag
 
-This is why options are so intertwined with our beliefs about the volatility of a stock: their price is a direct expression of what the market expects a stock's volatility to be. 
+This is why options are so intertwined with our beliefs about the future distribution of a stock: their price is a often an expression of what the market expects a stock's volatility to be. 
 
+### What about specific price ranges? 
+
+Remember the payoff diagrams from the beginning of the article? 
 ### Other Stuff
 
 This explainer is a work in progress! Please send feedback to: 
@@ -722,6 +723,13 @@ So if your option has 0.5 delta, and moves 50 cents for every dollar movement in
 
 This means, in order to purely trade volatility, we can 'delta hedge' our risk due to the underlying stock's movement by buying shares (or selling them) 
 
+### What's Put Call Parity?
+
+TODO: 
+
+### What about Second Order Greeks like Gamma? 
+
+TODO: 
 
 ### Resources to learn more + Works Cited:
 
@@ -736,11 +744,5 @@ https://moontowermeta.com/introducing-the-moontower-volatility-wiki/
 https://x.com/therobotjames/status/1444832714922758148?s=20
 
 
-MAYBE: 
-put call parity
-
-second order greeks
 
 """)
-
-
