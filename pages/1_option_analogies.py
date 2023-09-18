@@ -1,4 +1,5 @@
 import streamlit as st
+import utils.util_functions as utils
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
@@ -63,11 +64,7 @@ premium_initial = 10
 
 underlying_prices_plot = np.linspace(min_price_initial, max_price_initial, 8)
 
-def calculate_long_call_payoff(underlying_prices, strike_price, premium):
-    payoffs = np.where(underlying_prices <= strike_price, -premium, (underlying_prices - strike_price) - premium)
-    return payoffs
-
-payoffs_plot = calculate_long_call_payoff(underlying_prices_plot, strike_price_initial, premium_initial)
+payoffs_plot = utils.calculate_long_call_payoff(underlying_prices_plot, strike_price_initial, premium_initial)
 
 fig = px.line(x=underlying_prices_plot, y=payoffs_plot, labels={"x": "LeBron Shoe Value", "y": "Profit"})
 fig.update_layout(
@@ -103,7 +100,7 @@ premium_input = st.slider(
 
 underlying_prices_shoes = np.linspace(0, 1000, (1000))
 
-payoffs_shoes = calculate_long_call_payoff(underlying_prices_shoes, strike_price_input, premium_input)
+payoffs_shoes = utils.calculate_long_call_payoff(underlying_prices_shoes, strike_price_input, premium_input)
 
 fig2 = px.line(x=underlying_prices_shoes, y=payoffs_shoes, labels={"x": "LeBron Shoe Value", "y": "Profit"})
 fig2.update_layout(
@@ -171,11 +168,9 @@ premium_bag = 200
 
 underlying_prices_bag = np.linspace(min_price_bag, max_price_bag, max_price_bag-min_price_bag)
 
-def calculate_long_put_payoff(underlying_prices, strike_price, premium):
-    put_payoffs = np.where(underlying_prices <= strike_price, (strike_price - underlying_prices) - premium, -premium)
-    return put_payoffs
 
-payoffs_bag = calculate_long_put_payoff(underlying_prices_bag, strike_price_bag, premium_bag)
+
+payoffs_bag = utils.calculate_long_put_payoff(underlying_prices_bag, strike_price_bag, premium_bag)
 
 fig_bag = px.line(x=underlying_prices_bag, y=payoffs_bag, labels={"x": "Designer Handbag Value", "y": "Profit"})
 fig_bag.update_layout(
@@ -185,8 +180,6 @@ fig_bag.update_layout(
 )
 
 st.plotly_chart(fig_bag)
-
-import streamlit as st
 
 st.write("""
 
