@@ -1,4 +1,9 @@
 import streamlit as st
+import utils.util_functions as utils
+import numpy as np
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 st.write("""### How much should options cost?
 
@@ -34,14 +39,13 @@ Let's roll a dice 100,000 times, and plot a histogram of the rolls that we get
 
 
 
-def roll_dice():
-    return np.random.randint(1, 7)
+
 
 
 dice_strike = st.slider("Select the strike price of the option", 1, 6, 3)
 
 # Generate random dice rolls
-rolls = [roll_dice() for _ in range(100000)]
+rolls = [utils.roll_dice() for _ in range(100000)]
 
 hist, bin_edges = np.histogram(rolls, bins=6, range=(1, 7))
 
