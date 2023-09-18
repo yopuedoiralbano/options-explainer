@@ -477,7 +477,7 @@ def simulate_gbm_paths_plotly_histogram_with_bins(s0, mu, sigma, n=24, T=30, num
     
     st.plotly_chart(fig)
 
-simulate_gbm_paths_plotly_histogram_with_bins(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=100)
+simulate_gbm_paths_plotly_histogram_with_bins(s0=200, mu=0.0, sigma=0.005, n=24, T=30, num_paths=100)
 
 # Example usage:
 # simulate_gbm_paths_plotly_with_histogram(s0=100, mu=0.05, sigma=0.2, n=24, T=30, num_paths=5)
@@ -539,7 +539,7 @@ def simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0, mu, sigma, n=24,
     return end_values, strike_threshold
 
 
-end_prices, strike_value = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=100, strike_threshold=210)
+end_prices, strike_value = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=200, mu=0.0, sigma=0.005, n=24, T=30, num_paths=100, strike_threshold=210)
 
 st.write("""
 
@@ -607,7 +607,7 @@ sigma_input = st.slider(
     0, 25, 5)
 
 end_prices_interactive, strike_val_input = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=s0_input, 
-                                                                                                   mu=0.0005, sigma=sigma_input/1e3, 
+                                                                                                   mu=0.0, sigma=sigma_input/1e3, 
                                                                                                    n=24, T=time_to_expiry_input, 
                                                                                                    num_paths=200, 
                                                                                                    strike_threshold=strike_val_input)
