@@ -29,14 +29,14 @@ Here's how we're going to simulate a stock's potential future paths:
 There's some technical detail being glossed over in the above explanation, but feel free to look up geometric brownian motion if you want to learn more about the specifics!
 """)
 
-utils.simulate_gbm_paths(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=10, plot=True)
+utils.simulate_gbm_paths(s0=200, mu=0.0, sigma=0.005, n=24, T=30, num_paths=10, plot=True)
 
 st.write("""Now that we've simulated some paths, let's look at the distribution of outcomes these paths might create! 
 
 Let's generate a lot more paths: 100 should be a good number to start with
 """)
 
-utils.simulate_gbm_paths_plotly_histogram_with_bins(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=100)
+utils.simulate_gbm_paths_plotly_histogram_with_bins(s0=200, mu=0.0, sigma=0.005, n=24, T=30, num_paths=100)
 
 # Example usage:
 # simulate_gbm_paths_plotly_with_histogram(s0=100, mu=0.05, sigma=0.2, n=24, T=30, num_paths=5)
@@ -54,7 +54,7 @@ For now, we'll set the strike price to be 210.""")
 
 
 
-end_prices, strike_value = utils.simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=200, mu=0.0005, sigma=0.005, n=24, T=30, num_paths=100, strike_threshold=210)
+end_prices, strike_value = utils.simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=200, mu=0.0, sigma=0.005, n=24, T=30, num_paths=100, strike_threshold=210)
 
 st.write("""
 
