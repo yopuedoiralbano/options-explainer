@@ -1,4 +1,9 @@
 import streamlit as st
+import utils.util_functions as utils
+import numpy as np
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 st.write(""" 
 
@@ -50,10 +55,10 @@ sigma_input = st.slider(
     'Select how volatile the stock is!',
     0, 25, 5)
 
-end_prices_interactive, strike_val_input = simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=s0_input, 
+end_prices_interactive, strike_val_input = utils.simulate_gbm_paths_plotly_histogram_with_bins_and_color(s0=s0_input, 
                                                                                                    mu=0.0005, sigma=sigma_input/1e3, 
                                                                                                    n=24, T=time_to_expiry_input, 
                                                                                                    num_paths=200, 
                                                                                                    strike_threshold=strike_val_input)
 
-call_option_asset(end_prices_interactive, strike_val_input)
+utils.call_option_asset(end_prices_interactive, strike_val_input)
