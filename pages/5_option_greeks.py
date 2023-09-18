@@ -40,4 +40,4 @@ Theta, Delta, and Vega:
 
 **Delta** is the option's sensitivity to the stock price movement: as a stock goes up, its probability of ending above the strike is higher
 
-**Vega** is the option's sensitivity to volatility: as a stock gets more volatile, the width of its distribution increases, so the probability of ending above the strike is higher
+**Vega** is the option's sensitivity to volatility: as a stock gets more volatile, the width of its distribution increases, so the probability of ending above the strike is higher""")
