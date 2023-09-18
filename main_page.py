@@ -690,14 +690,11 @@ We call the volatility that actually happens 'realized volatility'.
 
 This is why options are so intertwined with our beliefs about the future distribution of a stock: their price is a often an expression of what the market expects a stock's volatility to be. 
 
-### What about specific price ranges? 
-
-Remember the payoff diagrams from the beginning of the article? 
 ### Other Stuff
 
 This explainer is a work in progress! Please send feedback to: 
 
-### Some FAQ I didn't cover:
+### FAQ
 
 #### How do I sell an option I don't have? 
 
@@ -707,9 +704,15 @@ Just like how you can buy these contracts, you can write one up for someone else
 
 There are times where you might want to be the one writing the contract, usually when you think that someone else is overestimating future 'realized volatility' versus your expectation
 
-#### What if I'm right about volatility, but wrong about the price movement? 
+#### What if I'm right about my trade on volatility, but wrong about the price movement? 
 
-This is a bit out of scope but if you think about it, you would want to offset the risk of the stock moving somehow. 
+Out of scope but here's a quick attempt at an explanation: 
+
+Sounds like you're taking on some risk that you didn't intend to be betting on. 
+
+You're getting paid for your view on volatility, but you don't get paid for the stock moving in one direction versus another. 
+
+So you would probably want to offset the risk of the stock moving somehow. 
 
 If you're long a put option, then your option doesn't just make money when realized volatility is higher than implied, you also make money when the stock goes down. But this means you'll also lose money if the stock goes up. 
 
@@ -725,11 +728,85 @@ This means, in order to purely trade volatility, we can 'delta hedge' our risk d
 
 ### What's Put Call Parity?
 
-TODO: 
+Out of scope but here's a quick attempt at an explanation: 
+
+Put Call Parity is basically just the realization that calls and puts are the two sides of the same coin. 
+
+By combining payoff diagrams, you might notice that being long a call and short a put. 
+
+### What about specific price ranges? 
+
+Out of scope but here's a quick attempt at some explanation: 
+
+What if we want to get even more specific about the price that we think a stock could be at, even moreso than implied versus realized volatility? 
+
+When stocks get bought out for a certain price per share, we know that they have to eventually hit the value that they're being bought at. 
+
+The best recent example of this case was Elon Musk's acquisition of Twitter - when it was bought for exactly 54.2 per share. 
+
+Even though you might've known this was happening: how would you make the trade? 
+- If you bought the stock outright, you would be limited by the amount of money that you had. 
+- If you bought the stock on leverage (with borrowed money), a move downward could make it such that your collateral can't cover your position's loss, and you'd be forced to exit
+
+Options provide a neat solution here
+
+Remember the payoff diagrams from earlier? 
+
+By using a combination of long calls, long puts, short calls, short puts, we can create pretty much any shape that represents the price range we expect a stock to have. 
+
+You might be enamored by the infinite upside of a call option, but if you don't realistically expect a stock to 
+
+Here is a great website to visualize the different combinations you can come up with: https://optionstrat.com/build/long-call/SPY/
+
+Note that these structures do not inherently have edge, but rather help you express your view on the distribution you expect to have occur. 
+
+Can you come up with an ideal structure to take advantage of knowing a stock will end up at a specific price? You can try to optimize for some price on SPY as an easy example to play with
+
+(general idea: be short options where you expect the price to land, and long options where you expect the price to not get to, think about why this is true!)
+
+There's a lot of ways to express the above opinion, that Twitter will be exactly 54.2 per share on the day of the deal, but two that you may have come up with are:
+- short two calls at 54.2 (or as close as possible), long a call one strike above, and long a call one strike below
+- the exact same as the above, but with puts
+
+Think about why this might be the case!
+
+### What about volatility skew and term structure
+
+Out of scope but here's a quick attempt at an explanation: 
+
+Remember how volatility isn't constant across time? 
+
+The implied volatility of a specific option's strike price likely fluctuates over the different expiration dates. That's term structure
+
+Volatility also isn't constant across price: 
+
+The implied volatility given a specific expiration date fluctuates over the different strike prices available. That's volatility skew. 
+
+Why this happens is non-trivial to explain, but you can read more about it here: 
+
+
 
 ### What about Second Order Greeks like Gamma? 
 
-TODO: 
+Out of scope but here's a quick attempt at an explanation: 
+
+Remember Theta, Delta, and Vega? How these change depends on the underlying asset as well!
+
+Gamma is Delta's sensitivity to change in the underlying asset's price
+
+Read more about gamma here: https://www.investopedia.com/terms/g/greeks.asp#toc-gamma
+
+There's more but they don't really matter that much, read more here: https://www.investopedia.com/terms/g/greeks.asp#toc-minor-greeks
+
+### What about Rho? 
+
+Out of scope, but its sensitivity of option price to interest rates. 
+
+Read more here: https://www.investopedia.com/terms/r/rho.asp
+
+### What about different expiry dates?
+
+Out of scope, TODO later
 
 ### Resources to learn more + Works Cited:
 
@@ -738,6 +815,8 @@ https://www.investopedia.com/terms/o/option.asp
 https://en.wikipedia.org/wiki/Geometric_Brownian_motion
 
 https://moontowerquant.com/options-starter-pack
+
+https://notion.moontowermeta.com/short-where-she-lands-long-where-she-aint
 
 https://moontowermeta.com/introducing-the-moontower-volatility-wiki/
 
