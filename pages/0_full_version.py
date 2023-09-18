@@ -4,13 +4,18 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-
 # Define the Streamlit app
 st.title("Options Explainer")
 
 st.write("""## Key Ideas of Options
 
-Options give us fine grained exposure to different levels of prices, letting us express detailed beliefs about price distributions
+Options give us fine grained exposure to different levels of prices, letting us express detailed beliefs about future price distributions.
+
+Rather than just buying or selling and betting on the direction of a stock, we can bet on a whole bunch of other ideas:
+- a stock going up or down (profiting when a stock moves a lot - regardless of direction)
+- a stock staying within a specific price range within some timeframe (profiting when a stock doesn't move very much - regardless of direction)
+- a stock being above or below a specific price within some timeframe 
+- and a whole lot more!
 
 ### What's an Option?
 
