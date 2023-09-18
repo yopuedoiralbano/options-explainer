@@ -785,7 +785,6 @@ The implied volatility given a specific expiration date fluctuates over the diff
 Why this happens is non-trivial to explain, but you can read more about it here: 
 
 
-
 ### What about Second Order Greeks like Gamma? 
 
 Out of scope but here's a quick attempt at an explanation: 
